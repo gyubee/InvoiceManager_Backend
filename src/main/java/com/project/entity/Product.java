@@ -1,10 +1,11 @@
+//entity/Product
 package com.project.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,14 +14,21 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Column(name = "product_code", unique = true, nullable = false)
-    private String productCode;
+    @Column(name = "hs_code", nullable = false)
+    private String hsCode;
 
-    @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    @Column(name = "unit_price", nullable = false)
+    private BigDecimal unitPrice;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "quantity", nullable = false)
+    private BigDecimal quantity;
+
+//    @Column(name = "category")
+//    private String category;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 
     public Integer getProductId() {
         return productId;
@@ -38,27 +46,42 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductCode() {
-        return productCode;
+    public String getHsCode() {
+        return hsCode;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setHsCode(String hsCode) {
+        this.hsCode = hsCode;
+    }
+    public BigDecimal getQuantity() {
+        return quantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public String getCategory() {
-        return category;
+    public void setUnitPrice(BigDecimal price) {
+        this.unitPrice = price;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+//    public String getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(String category) {
+//        this.category = category;
+//    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }
+
