@@ -18,3 +18,12 @@ spring:
         options:
           model: gpt-4o-mini
 
+server:
+  port: 8001
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
