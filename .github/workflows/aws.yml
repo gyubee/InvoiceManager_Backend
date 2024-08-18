@@ -3,7 +3,7 @@ name: Java CI/CD
 on:
   pull_request:
     types: [closed]
-    branches: [main]
+    branches: [develop]
 
 jobs:
   build-and-deploy:
