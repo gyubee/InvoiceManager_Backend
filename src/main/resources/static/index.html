@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload and Get DB</title>
+</head>
+<body>
+    <h1>Image Upload and Get DB</h1>
+
+    <!-- 이미지 업로드 폼 -->
+    <form id="uploadForm">
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="button" onclick="uploadImage()">Upload</button>
+    </form>
+
+    <!-- DB 가져오기 버튼 -->
+    <button type="button" onclick="getDbData()">Get DB Data</button>
+
+    <!-- 결과를 표시할 영역 -->
+    <div id="result"></div>
+
+    <script>
+        // 이미지 업로드 함수
+        function uploadImage() {
+            const imageInput = document.getElementById('image');
+            const file = imageInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                fetch('http://localhost:5000/upload_image', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerText = 'Image uploaded successfully: ' + JSON.stringify(data);
+                })
+                .catch(error => {
+                    document.getElementById('result').innerText = 'Error uploading image: ' + error;
+                });
+            } else {
+                alert('Please select an image to upload.');
+            }
+        }
+
+        // DB 데이터 가져오기 함수
+        function getDbData() {
+            fetch('http://localhost:5000/get_db')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = 'DB Data: ' + JSON.stringify(data);
+            })
+            .catch(error => {
+                document.getElementById('result').innerText = 'Error fetching DB data: ' + error;
+            });
+        }
+    </script>
+</body>
+</html>
