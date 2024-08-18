@@ -137,7 +137,7 @@ public class ChatController {
 
     @GetMapping("/add")
     public String home() {
-        return "AAA";
+        return "AAAAAAAAA";
     }
 
 
