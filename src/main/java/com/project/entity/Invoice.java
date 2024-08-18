@@ -16,6 +16,7 @@ public class Invoice {
     private Integer invoiceId;
 
     @Column(name = "company_name")
+    //need to fix
     private String companyName;
 
     @Column(name = "country")
