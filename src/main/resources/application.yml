@@ -1,3 +1,5 @@
+#application.yml
+
 spring:
   application:
     name: InvoiceManager
@@ -20,7 +22,8 @@ spring:
 
 server:
   port: 8001
-
+  address : 0.0.0.0
+#  should be changed to fronted domain
 
 logging:
   level:
