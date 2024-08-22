@@ -31,7 +31,7 @@
                 const formData = new FormData();
                 formData.append('image', file);
 
-                fetch('http://localhost:5000/upload_image', {
+                fetch('http://localhost:8001/invoice/ai/image/upload', {
                     method: 'POST',
                     body: formData
                 })
@@ -49,7 +49,7 @@
 
         // DB 데이터 가져오기 함수
         function getDbData() {
-            fetch('http://localhost:5000/get_db')
+            fetch('http://localhost:8001/invoice/get_db')
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result').innerText = 'DB Data: ' + JSON.stringify(data);

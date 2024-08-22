@@ -3,9 +3,7 @@ package com.project.controller;
 
 
 import com.project.dto.InvoiceDTO;
-import com.project.dto.ProductDTO;
-import com.project.entity.Invoice;
-import com.project.entity.Product;
+import com.project.service.OpenAiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.project.service.InvoiceService;
@@ -23,6 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,19 +36,19 @@ public class ChatController {
 
     private final OpenAiChatModel chatModel;
 
+    private final OpenAiService openAiService;
 
     @Autowired
     private InvoiceService invoiceService;
-
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
-    public ChatController(OpenAiChatModel chatModel) {
+    public ChatController(OpenAiChatModel chatModel, OpenAiService openAiService) {
         this.chatModel = chatModel;
+        this.openAiService = openAiService;
     }
-
 
     @GetMapping("/ai/text")
     public Map generate(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
@@ -108,12 +107,10 @@ public class ChatController {
             ChatResponse response = chatModel.call(prompt);
             String jsonString = response.getResult().getOutput().getContent();
 
-            // Remove the JSON code block markers if present
             jsonString = jsonString.replace("```json", "").replace("```", "").trim();
 
             Map<String, Object> invoiceData = objectMapper.readValue(jsonString, Map.class);
 
-            // If save parameter is true, save the data
             if (save) {
                 invoiceService.saveInvoiceData(invoiceData);
                 invoiceData.put("status", "Invoice data saved successfully");
@@ -132,6 +129,15 @@ public class ChatController {
         } catch (Exception e) {
             logger.error("Unexpected error", e);
             return Map.of("error", "An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/ai/image/upload")
+    public String describeImage(@RequestParam("image") MultipartFile imageFile) {
+        try {
+            return openAiService.describeImage(imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to process the image", e);
         }
     }
 
