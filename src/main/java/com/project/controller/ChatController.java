@@ -132,10 +132,11 @@ public class ChatController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/ai/image/upload")
     public String describeImage(@RequestParam("image") MultipartFile imageFile) {
         try {
-            return openAiService.describeImage(imageFile);
+            return openAiService.extractInvoice(imageFile);
         } catch (IOException e) {
             throw new RuntimeException("Failed to process the image", e);
         }

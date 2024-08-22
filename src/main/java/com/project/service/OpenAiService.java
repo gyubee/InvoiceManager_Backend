@@ -29,7 +29,7 @@ public class OpenAiService {
         this.restTemplate = restTemplate;
     }
 
-    public String describeImage(MultipartFile imageFile) throws IOException {
+    public String extractInvoice(MultipartFile imageFile) throws IOException {
         String base64Image = encodeImage(imageFile);
 
         HttpHeaders headers = new HttpHeaders();
@@ -40,19 +40,25 @@ public class OpenAiService {
         payload.put("model", "gpt-4o-mini");
         payload.put("messages", List.of(
                 Map.of("role", "user", "content", List.of(
-                        Map.of("type", "text", "text", "Please extract the following details from the invoice data and provide the information in JSON format:\n" +
+                        Map.of("type", "text", "text", "Please extract the following details from the invoice data complete the JSON data\n" +
                                 "\n" +
-                                "- Company name\n" +
-                                "- Country where the company is located\n" +
-                                "- Company address postcode\n" +
-                                "- Order date\n" +
-                                "- Total price\n" +
-                                "- Product name\n" +
-                                "- Hs code\n" +
-                                "- Quantity of the product\n" +
-                                "- Unit price of the product\n" +
+"                                {\n" +
+"                                            \"receive_date\": \"\",\n" +
+"                                            \"total_price\": \"\",\n" +
+"                                            \"company_name\": \"\",\n" +
+"                                            \"company_address\": \"\",\n" +
+"                                            \"products\": [\n" +
+"                                    {\n" +
+"                                        \"product_name\": \"\",\n" +
+"                                            \"hscode\": \"\",\n" +
+"                                            \"quantity\": ,\n" +
+"                                            \"unit_price\": \"\",\n" +
+"                                            \"expiration_date\": \"\"\n" +
+"                                    },\n" +
+"                              ]\n" +
+"                            }\n"+
                                 "\n" +
-                                "The JSON format should include all these details organized under appropriate keys.\n"),
+                                "Do not include any other word or information other than the json data and is there is non found, leave it as blank or null \n"),
                         Map.of("type", "image_url", "image_url", Map.of("url", "data:image/jpeg;base64," + base64Image))
                 ))
         ));
@@ -84,7 +90,13 @@ public class OpenAiService {
         if (choices != null && !choices.isEmpty()) {
             Map<String, Object> message = (Map<String, Object>) choices.get(0).get("message");
             if (message != null) {
-                return (String) message.get("content");
+                String content = (String) message.get("content");
+
+                // Remove the "```json" and "```" markers
+                if (content != null) {
+                    content = content.replace("```json", "").replace("```", "").trim();
+                }
+                return content;
             }
         }
         return "No content found";
