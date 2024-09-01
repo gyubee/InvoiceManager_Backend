@@ -1,14 +1,14 @@
 package com.project.service;
 
-import com.project.entity.User;
+import com.project.entity.Users;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    User saveUser(User user);
-    User updateUser(Long id, User user);
-    Optional<User> getUserById(Long id);
-    List<User> getAllUsers();
+    Users saveUser(Users user);
+    Users updateUser(Long id, Users user);
+    Optional<Users> getUserById(Long id);
+    List<Users> getAllUsers();
     void deleteUser(Long id);
 }
