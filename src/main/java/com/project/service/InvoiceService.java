@@ -41,76 +41,76 @@ public class InvoiceService {
             DateTimeFormatter.ofPattern("yyyy-MM-dd")
     );
 
-    @Transactional
-    public void saveInvoiceData(Map<String, Object> invoiceData) {
-        Invoice invoice = createInvoice(invoiceData);
-        Invoice savedInvoice = invoiceRepository.save(invoice);
+//    @Transactional
+//    public void saveInvoiceData(Map<String, Object> invoiceData) {
+//        Invoice invoice = createInvoice(invoiceData);
+//        Invoice savedInvoice = invoiceRepository.save(invoice);
+//
+//        List<Map<String, Object>> products = (List<Map<String, Object>>) invoiceData.get("products");
+//        for (Map<String, Object> productData : products) {
+//            saveOrUpdateProduct(productData, savedInvoice);
+//        }
+//    }
 
-        List<Map<String, Object>> products = (List<Map<String, Object>>) invoiceData.get("products");
-        for (Map<String, Object> productData : products) {
-            saveOrUpdateProduct(productData, savedInvoice);
-        }
-    }
+//    private Invoice createInvoice(Map<String, Object> invoiceData) {
+//        Invoice invoice = new Invoice();
+//        invoice.setCompanyName(getStringValue(invoiceData, "company_name"));
+//        invoice.setCountry(getStringValue(invoiceData, "country"));
+//        invoice.setOrderDate(parseDateValue(invoiceData, "order_date"));
+//        invoice.setTotalPrice(getBigDecimalValue(invoiceData, "total_price"));
+//        return invoice;
+//    }
 
-    private Invoice createInvoice(Map<String, Object> invoiceData) {
-        Invoice invoice = new Invoice();
-        invoice.setCompanyName(getStringValue(invoiceData, "company_name"));
-        invoice.setCountry(getStringValue(invoiceData, "country"));
-        invoice.setOrderDate(parseDateValue(invoiceData, "order_date"));
-        invoice.setTotalPrice(getBigDecimalValue(invoiceData, "total_price"));
-        return invoice;
-    }
-
-    private void saveOrUpdateProduct(Map<String, Object> productData, Invoice invoice) {
-        Product product = new Product();
-        product.setProductName(getStringValue(productData, "product_name"));
-        product.setHsCode(getStringValue(productData, "hs_code"));
-        product.setQuantity(getBigDecimalValue(productData, "quantity"));
-        product.setUnitPrice(getBigDecimalValue(productData, "unit_price"));
-        product.setInvoice(invoice);
-
-        productRepository.save(product);
-    }
+//    private void saveOrUpdateProduct(Map<String, Object> productData, Invoice invoice) {
+//        Product product = new Product();
+//        product.setProductName(getStringValue(productData, "product_name"));
+//        product.setHsCode(getStringValue(productData, "hs_code"));
+//        product.setQuantity(getBigDecimalValue(productData, "quantity"));
+//        product.setUnitPrice(getBigDecimalValue(productData, "unit_price"));
+//        product.setInvoice(invoice);
+//
+//        productRepository.save(product);
+//    }
 
 
 //    DTO
-    public List<InvoiceDTO> getAllInvoicesDTO() {
-        List<Invoice> invoices = invoiceRepository.findAll();
-        return invoices.stream().map(this::convertToDTO).collect(Collectors.toList());
-    }
+//    public List<InvoiceDTO> getAllInvoicesDTO() {
+//        List<Invoice> invoices = invoiceRepository.findAll();
+//        return invoices.stream().map(this::convertToDTO).collect(Collectors.toList());
+//    }
 //    public List<InvoiceDTO> getAllProductsDTO() {
 //        List<Product> products = productRepository.findAll();
 //        return products.stream().map(this::convertToDTO).collect(Collectors.toList());
 //    }
 
-    public InvoiceDTO getInvoiceWithProductsDTO(Long invoiceId) {
-        Invoice invoice = invoiceRepository.findById(invoiceId)
-                .orElseThrow(() -> new RuntimeException("Invoice not found"));
-        return convertToDTO(invoice);
-    }
+//    public InvoiceDTO getInvoiceWithProductsDTO(Long invoiceId) {
+//        Invoice invoice = invoiceRepository.findById(invoiceId)
+//                .orElseThrow(() -> new RuntimeException("Invoice not found"));
+//        return convertToDTO(invoice);
+//    }
 
-    private InvoiceDTO convertToDTO(Invoice invoice) {
-        InvoiceDTO dto = new InvoiceDTO();
-        dto.setInvoiceId(invoice.getInvoiceId());
-        dto.setCompanyName(invoice.getCompanyName());
-        dto.setCountry(invoice.getCountry());
-        dto.setOrderDate(invoice.getOrderDate());
-        dto.setTotalPrice(invoice.getTotalPrice());
-        dto.setProducts(invoice.getProducts().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
-        return dto;
-    }
+//    private InvoiceDTO convertToDTO(Invoice invoice) {
+//        InvoiceDTO dto = new InvoiceDTO();
+//        dto.setInvoiceId(invoice.getInvoiceId());
+//        dto.setCompanyName(invoice.getCompanyName());
+//        dto.setCountry(invoice.getCountry());
+//        dto.setOrderDate(invoice.getOrderDate());
+//        dto.setTotalPrice(invoice.getTotalPrice());
+//        dto.setProducts(invoice.getProducts().stream()
+//                .map(this::convertToDTO)
+//                .collect(Collectors.toList()));
+//        return dto;
+//    }
 
-    private ProductDTO convertToDTO(Product product) {
-        ProductDTO dto = new ProductDTO();
-        dto.setProductId(product.getProductId());
-        dto.setProductName(product.getProductName());
-        dto.setHsCode(product.getHsCode());
-        dto.setUnitPrice(product.getUnitPrice());
-        dto.setQuantity(product.getQuantity());
-        return dto;
-    }
+//    private ProductDTO convertToDTO(Product product) {
+//        ProductDTO dto = new ProductDTO();
+//        dto.setProductId(product.getProductId());
+//        dto.setProductName(product.getProductName());
+//        dto.setHsCode(product.getHsCode());
+//        dto.setUnitPrice(product.getUnitPrice());
+//        dto.setQuantity(product.getQuantity());
+//        return dto;
+//    }
 
 
     private String getStringValue(Map<String, Object> data, String key) {

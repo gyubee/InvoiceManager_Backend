@@ -2,6 +2,8 @@ package com.project.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "invoice_item")
@@ -9,6 +11,14 @@ public class InvoiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer invoiceItemId;
+
+    @Column(nullable = false)
+    private Integer quantity;
+
+    @Column(nullable = false)
+    private BigDecimal unitPrice;
+
+    private LocalDate expirationDate;
 
     @ManyToOne
     @JoinColumn(name = "invoice_id")
@@ -18,34 +28,12 @@ public class InvoiceItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
-
-    @Column(name = "unit_price", nullable = false)
-    private BigDecimal unitPrice;
-
     public Integer getInvoiceItemId() {
         return invoiceItemId;
     }
 
     public void setInvoiceItemId(Integer invoiceItemId) {
         this.invoiceItemId = invoiceItemId;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Integer getQuantity() {
@@ -62,5 +50,29 @@ public class InvoiceItem {
 
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

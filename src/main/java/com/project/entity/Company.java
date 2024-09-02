@@ -9,11 +9,12 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer companyId;
 
-    @Column(name = "company_name", nullable = false)
+    @Column(nullable = false)
     private String companyName;
 
-    @Column(name = "company_code", unique = true, nullable = false)
-    private String companyCode;
+    private String companyAddress;
+
+    private String companyEmail;
 
     public Integer getCompanyId() {
         return companyId;
@@ -31,11 +32,19 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public String getCompanyCode() {
-        return companyCode;
+    public String getCompanyAddress() {
+        return companyAddress;
     }
 
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+
+    public String getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
     }
 }

@@ -1,6 +1,6 @@
 package com.project.service;
 
-import com.project.entity.User;
+import com.project.entity.Users;
 import com.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public Users saveUser(Users user) {
         return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(Long id, User user) {
+    public Users updateUser(Long id, Users user) {
         if (userRepository.existsById(id)) {
             user.setId(id);
             return userRepository.save(user);
@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
+    public Optional<Users> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 

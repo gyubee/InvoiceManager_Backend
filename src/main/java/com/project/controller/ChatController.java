@@ -77,60 +77,60 @@ public class ChatController {
         }
     }
 
-    @GetMapping("/ai/image/local")
-    public Map<String, Object> describeImageFromLocal(@RequestParam(defaultValue = "false") boolean save) {
-        String imagePath = "img/invoice3.png"; // Use relative path within resources
-        ClassPathResource resource = new ClassPathResource(imagePath);
-
-        try {
-            byte[] imageData = resource.getInputStream().readAllBytes();
-            UserMessage userMessage = new UserMessage(
-                    "Please extract the following details from the invoice data and provide the information in JSON format:\n" +
-                            "\n" +
-                            "- Company name\n" +
-                            "- Country where the company is located\n" +
-                            "- Company address postcode\n" +
-                            "- Order date\n" +
-                            "- Total price\n" +
-                            "- Product name\n" +
-                            "- Hs code\n" +
-                            "- Quantity of the product\n" +
-                            "- Unit price of the product\n" +
-                            "\n" +
-                            "The JSON format should include all these details organized under appropriate keys.\n",
-                    List.of(new Media(MimeTypeUtils.IMAGE_PNG, imageData))
-            );
-
-            Prompt prompt = new Prompt(List.of(userMessage),
-                    OpenAiChatOptions.builder().withModel(OpenAiApi.ChatModel.GPT_4_O.getValue()).build());
-
-            ChatResponse response = chatModel.call(prompt);
-            String jsonString = response.getResult().getOutput().getContent();
-
-            jsonString = jsonString.replace("```json", "").replace("```", "").trim();
-
-            Map<String, Object> invoiceData = objectMapper.readValue(jsonString, Map.class);
-
-            if (save) {
-                invoiceService.saveInvoiceData(invoiceData);
-                invoiceData.put("status", "Invoice data saved successfully");
-            } else {
-                invoiceData.put("status", "Invoice data extracted but not saved");
-            }
-
-            logger.info("AI Response: {}", invoiceData);
-            return invoiceData;
-        } catch (IOException e) {
-            logger.error("File read error", e);
-            return Map.of("error", "Failed to read the local file. Please make sure the file exists and the path is correct.");
-        } catch (NonTransientAiException e) {
-            logger.error("AI processing error", e);
-            return Map.of("error", "Failed to process the image. Please ensure it is a valid format.");
-        } catch (Exception e) {
-            logger.error("Unexpected error", e);
-            return Map.of("error", "An unexpected error occurred: " + e.getMessage());
-        }
-    }
+//    @GetMapping("/ai/image/local")
+//    public Map<String, Object> describeImageFromLocal(@RequestParam(defaultValue = "false") boolean save) {
+//        String imagePath = "img/invoice3.png"; // Use relative path within resources
+//        ClassPathResource resource = new ClassPathResource(imagePath);
+//
+//        try {
+//            byte[] imageData = resource.getInputStream().readAllBytes();
+//            UserMessage userMessage = new UserMessage(
+//                    "Please extract the following details from the invoice data and provide the information in JSON format:\n" +
+//                            "\n" +
+//                            "- Company name\n" +
+//                            "- Country where the company is located\n" +
+//                            "- Company address postcode\n" +
+//                            "- Order date\n" +
+//                            "- Total price\n" +
+//                            "- Product name\n" +
+//                            "- Hs code\n" +
+//                            "- Quantity of the product\n" +
+//                            "- Unit price of the product\n" +
+//                            "\n" +
+//                            "The JSON format should include all these details organized under appropriate keys.\n",
+//                    List.of(new Media(MimeTypeUtils.IMAGE_PNG, imageData))
+//            );
+//
+//            Prompt prompt = new Prompt(List.of(userMessage),
+//                    OpenAiChatOptions.builder().withModel(OpenAiApi.ChatModel.GPT_4_O.getValue()).build());
+//
+//            ChatResponse response = chatModel.call(prompt);
+//            String jsonString = response.getResult().getOutput().getContent();
+//
+//            jsonString = jsonString.replace("```json", "").replace("```", "").trim();
+//
+//            Map<String, Object> invoiceData = objectMapper.readValue(jsonString, Map.class);
+//
+//            if (save) {
+//                invoiceService.saveInvoiceData(invoiceData);
+//                invoiceData.put("status", "Invoice data saved successfully");
+//            } else {
+//                invoiceData.put("status", "Invoice data extracted but not saved");
+//            }
+//
+//            logger.info("AI Response: {}", invoiceData);
+//            return invoiceData;
+//        } catch (IOException e) {
+//            logger.error("File read error", e);
+//            return Map.of("error", "Failed to read the local file. Please make sure the file exists and the path is correct.");
+//        } catch (NonTransientAiException e) {
+//            logger.error("AI processing error", e);
+//            return Map.of("error", "Failed to process the image. Please ensure it is a valid format.");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error", e);
+//            return Map.of("error", "An unexpected error occurred: " + e.getMessage());
+//        }
+//    }
 
     @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/ai/image/upload")
@@ -154,20 +154,20 @@ public class ChatController {
 //        return ResponseEntity.ok(products);
 //    }
 
-    @GetMapping("/get/invoices")
-    public ResponseEntity<List<InvoiceDTO>> getAllInvoices() {
-        List<InvoiceDTO> invoices = invoiceService.getAllInvoicesDTO();
-        return ResponseEntity.ok(invoices);
-    }
-
-    @GetMapping("/get/invoices/{id}")
-    public ResponseEntity<InvoiceDTO> getInvoiceWithProducts(@PathVariable Long id) {
-        try {
-            InvoiceDTO invoice = invoiceService.getInvoiceWithProductsDTO(id);
-            return ResponseEntity.ok(invoice);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/get/invoices")
+//    public ResponseEntity<List<InvoiceDTO>> getAllInvoices() {
+//        List<InvoiceDTO> invoices = invoiceService.getAllInvoicesDTO();
+//        return ResponseEntity.ok(invoices);
+//    }
+//
+//    @GetMapping("/get/invoices/{id}")
+//    public ResponseEntity<InvoiceDTO> getInvoiceWithProducts(@PathVariable Long id) {
+//        try {
+//            InvoiceDTO invoice = invoiceService.getInvoiceWithProductsDTO(id);
+//            return ResponseEntity.ok(invoice);
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }
