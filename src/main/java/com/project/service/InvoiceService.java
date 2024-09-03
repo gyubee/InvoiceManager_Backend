@@ -3,10 +3,13 @@ package com.project.service;
 
 import com.project.dto.InvoiceDTO;
 import com.project.dto.ProductDTO;
-import com.project.entity.Invoice;
-import com.project.entity.Product;
-import com.project.repository.InvoiceRepository;
-import com.project.repository.ProductRepository;
+//import com.project.entity.Invoice;
+//import com.project.entity.Product;
+//import com.project.repository.InvoiceRepository;
+//import com.project.repository.ProductRepository;
+// is it okay to load like this?
+import com.project.entity.*;
+import com.project.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +18,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -155,5 +156,102 @@ public class InvoiceService {
             logger.error("Unable to parse date: {} for key: {}", dateString, key, e);
             return LocalDate.now();
         }
+    }
+
+    //    승우
+
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
+    private InvoiceItemRepository invoiceItemRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+//    data time fortmat
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH);
+
+    @Transactional
+    public void saveInvoiceData(Map<String, Object> invoiceData) {
+        Company company = setCompany(invoiceData);
+        Invoice invoice = setInvoice(invoiceData, company);
+        invoice = invoiceRepository.save(invoice);
+
+        List<Map<String, Object>> products = (List<Map<String, Object>>) invoiceData.get("products");
+        for (Map<String, Object> productData : products) {
+            Product product = setProduct(productData, company);
+            setInvoiceItem(invoice, product, productData);
+        }
+
+        invoiceRepository.save(invoice);
+    }
+
+    private Company setCompany(Map<String, Object> invoiceData) {
+        String companyName = (String) invoiceData.get("company_name");
+        Company company = companyRepository.findByCompanyName(companyName)
+                .orElse(new Company());
+
+        company.setCompanyName(companyName);
+        company.setCompanyAddress((String) invoiceData.get("company_address_postcode"));
+        return companyRepository.save(company);
+    }
+
+    private Invoice setInvoice(Map<String, Object> invoiceData, Company company) {
+        Invoice invoice = new Invoice();
+        invoice.setCompany(company);
+
+
+        try {
+            String dateString = (String) invoiceData.get("order_date");
+            LocalDate orderDate = LocalDate.parse(dateString, DATE_FORMATTER);
+            invoice.setReceiveDate(orderDate);
+        } catch (DateTimeParseException e) {
+            throw new RuntimeException("Invalid date format. Expected 'dd MMM yyyy', got: " + invoiceData.get("order_date"), e);
+        }
+
+        invoice.setTotalPrice(new BigDecimal(((String) invoiceData.get("total_price")).replace(",", "")));
+        invoice.setInvoiceItems(new ArrayList<>());
+        return invoice;
+    }
+
+    private Product setProduct(Map<String, Object> productData, Company supplier) {
+        String productName = (String) productData.get("product_name");
+        Product product = productRepository.findByProductName(productName)
+                .orElse(new Product());
+
+        product.setProductName(productName);
+        product.setHscode((String) productData.get("hs_code"));
+        product.setSalePrice(new BigDecimal((String) productData.get("unit_price")));
+        product.setSupplier(supplier);
+
+        // Set a default category
+        Category category = setCategory("Default");
+        product.setCategory(category);
+
+        // Set a default stock value
+        product.setStock(0);
+
+        return productRepository.save(product);
+    }
+
+    private Category setCategory(String categoryName) {
+        return categoryRepository.findByCategoryName(categoryName)
+                .orElseGet(() -> {
+                    Category newCategory = new Category();
+                    newCategory.setCategoryName(categoryName);
+                    return categoryRepository.save(newCategory);
+                });
+    }
+
+    private void setInvoiceItem(Invoice invoice, Product product, Map<String, Object> productData) {
+        InvoiceItem invoiceItem = new InvoiceItem();
+        invoiceItem.setInvoice(invoice);
+        invoiceItem.setProduct(product);
+        invoiceItem.setQuantity((Integer) productData.get("quantity"));
+        invoiceItem.setUnitPrice(new BigDecimal((String) productData.get("unit_price")));
+
+        invoice.getInvoiceItems().add(invoiceItem);
+        invoiceItemRepository.save(invoiceItem);
     }
 }
