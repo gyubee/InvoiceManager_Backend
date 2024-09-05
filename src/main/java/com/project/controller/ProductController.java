@@ -50,12 +50,12 @@ public class ProductController {
         return productService.getAllProductsWithStock();
     }
 
-    @GetMapping("/{id}/stock")
+    @GetMapping("/{productId}/stock")
     public Integer getStockByProductId(@PathVariable Integer productId) {
         return productService.getStockByProductId(productId);
     }
 
-    @PutMapping("/{id}/stock")
+    @PutMapping("/{productId}/stock")
     public Product updateProductStock(@PathVariable Integer productId, @RequestParam Integer newStock) {
         return productService.updateProductStock(productId, newStock);
     }
