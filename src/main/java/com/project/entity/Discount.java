@@ -1,6 +1,8 @@
 package com.project.entity;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -17,11 +19,15 @@ public class Discount {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "invoiceitem_id")
+    private InvoiceItem invoiceItem;
+
     private Integer daysBeforeExpiration;
 
-    private LocalDateTime discountStartDate;
+    private LocalDate discountStartDate;
 
-    private LocalDateTime discountEndDate;
+    private LocalDate discountEndDate;
 
     public Integer getDiscountId() {
         return discountId;
@@ -47,6 +53,14 @@ public class Discount {
         this.product = product;
     }
 
+    public InvoiceItem getInvoiceItem() {
+        return invoiceItem;
+    }
+
+    public void setInvoiceItem(InvoiceItem invoiceItem) {
+        this.invoiceItem = invoiceItem;
+    }
+
     public Integer getDaysBeforeExpiration() {
         return daysBeforeExpiration;
     }
@@ -55,19 +69,19 @@ public class Discount {
         this.daysBeforeExpiration = daysBeforeExpiration;
     }
 
-    public LocalDateTime getDiscountStartDate() {
+    public LocalDate getDiscountStartDate() {
         return discountStartDate;
     }
 
-    public void setDiscountStartDate(LocalDateTime discountStartDate) {
+    public void setDiscountStartDate(LocalDate discountStartDate) {
         this.discountStartDate = discountStartDate;
     }
 
-    public LocalDateTime getDiscountEndDate() {
+    public LocalDate getDiscountEndDate() {
         return discountEndDate;
     }
 
-    public void setDiscountEndDate(LocalDateTime discountEndDate) {
+    public void setDiscountEndDate(LocalDate discountEndDate) {
         this.discountEndDate = discountEndDate;
     }
 }
