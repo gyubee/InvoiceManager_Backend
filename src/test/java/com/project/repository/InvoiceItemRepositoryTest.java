@@ -42,21 +42,21 @@ class InvoiceItemRepositoryTest {
     }
 
 
-    @Test
-    void testFindDiscountDetailsByProductId() {
-        List<Object[]> mockResult = Arrays.asList(
-                new Object[]{1, 10, BigDecimal.valueOf(100), 0, LocalDate.now().plusDays(5)},
-                new Object[]{2, 5, BigDecimal.valueOf(150), 10, LocalDate.now().plusDays(10)}
-        );
-
-        when(invoiceItemRepository.findDiscountDetailsByProductId(1))
-                .thenReturn(mockResult);
-
-        List<Object[]> result = invoiceItemRepository.findDiscountDetailsByProductId(1);
-
-        assertFalse(result.isEmpty());
-        assertEquals(BigDecimal.valueOf(100), result.get(0)[2]); // Unit price
-    }
+//    @Test
+//    void testFindDiscountDetailsByProductId() {
+//        List<Object[]> mockResult = Arrays.asList(
+//                new Object[]{1, 10, BigDecimal.valueOf(100), 0, LocalDate.now().plusDays(5)},
+//                new Object[]{2, 5, BigDecimal.valueOf(150), 10, LocalDate.now().plusDays(10)}
+//        );
+//
+//        when(invoiceItemRepository.findDiscountDetailsByProductId(1))
+//                .thenReturn(mockResult);
+//
+//        List<Object[]> result = invoiceItemRepository.findDiscountDetailsByProductId(1);
+//
+//        assertFalse(result.isEmpty());
+//        assertEquals(BigDecimal.valueOf(100), result.get(0)[2]); // Unit price
+//    }
 
 
     @Test

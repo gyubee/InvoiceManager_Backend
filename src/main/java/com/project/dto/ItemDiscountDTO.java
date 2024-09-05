@@ -10,6 +10,14 @@ public class ItemDiscountDTO {
     private Float discountRate;
     private LocalDate expirationDate;
 
+    public ItemDiscountDTO(Integer invoiceItemId, Float discountRate, Integer quantity, BigDecimal unitPrice, LocalDate expirationDate) {
+        this.invoiceItemId = invoiceItemId;
+        this.discountRate = discountRate;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.expirationDate = expirationDate;
+    }
+
     public Integer getInvoiceItemId() {
         return invoiceItemId;
     }

@@ -18,26 +18,30 @@ public class InvoiceItemService {
 
     // Details for setting discount for product items
     public List<ItemDiscountDTO> findDiscountDetailsByProductId(Integer productId) {
-        List<Object[]> results = invoiceItemRepository.findDiscountDetailsByProductId(productId);
-        List<ItemDiscountDTO> dtoList = new ArrayList<>();
-
-        for (Object[] result : results) {
-            Integer invoiceItemId = (Integer) result[0];
-            Integer quantity = ((Number) result[1]).intValue();
-            BigDecimal unitPrice = ((BigDecimal) result[2]);
-            Float discountRate = ((Number) result[3]).floatValue();
-            LocalDate expirationDate = ((LocalDate) result[4]);
-
-            ItemDiscountDTO dto = new ItemDiscountDTO();
-            dto.setInvoiceItemId(invoiceItemId);
-            dto.setQuantity(quantity);
-            dto.setUnitPrice(unitPrice);
-            dto.setDiscountRate(discountRate);
-            dto.setExpirationDate(expirationDate);
-
-            dtoList.add(dto);
-        }
-
-        return dtoList;
+        return invoiceItemRepository.findDiscountDetailsByProductId(productId);
     }
+
+//    public List<ItemDiscountDTO> findDiscountDetailsByProductId(Integer productId) {
+//        List<Object[]> results = invoiceItemRepository.findDiscountDetailsByProductId(productId);
+//        List<ItemDiscountDTO> dtoList = new ArrayList<>();
+//
+//        for (Object[] result : results) {
+//            Integer invoiceItemId = (Integer) result[0];
+//            Integer quantity = ((Number) result[1]).intValue();
+//            BigDecimal unitPrice = ((BigDecimal) result[2]);
+//            Float discountRate = ((Number) result[3]).floatValue();
+//            LocalDate expirationDate = ((LocalDate) result[4]);
+//
+//            ItemDiscountDTO dto = new ItemDiscountDTO();
+//            dto.setInvoiceItemId(invoiceItemId);
+//            dto.setQuantity(quantity);
+//            dto.setUnitPrice(unitPrice);
+//            dto.setDiscountRate(discountRate);
+//            dto.setExpirationDate(expirationDate);
+//
+//            dtoList.add(dto);
+//        }
+//
+//        return dtoList;
+//    }
 }

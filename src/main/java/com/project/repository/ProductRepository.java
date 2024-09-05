@@ -27,18 +27,33 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     // DISCOUNT related methods
     // All product with the earliest expiration date first
-    @Query("SELECT p.productId, p.productName, p.hsCode, p.price, c.categoryName, s.companyName as supplierName, " +
+    @Query("SELECT p.productId, p.productName, p.hscode, p.salePrice, c.categoryName, s.companyName as supplierName, " +
             "MIN(ii.expirationDate) as closestExpiryDate, " +
             "SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) as quantityAtClosestExpiryDate, " +
             "SUM(ii.quantity) as totalStock " +
             "FROM Product p " +
-            "JOIN InvoiceItem ii ON p.productId = ii.productId " +
-            "JOIN Category c ON p.categoryId = c.categoryId " +
-            "JOIN Company s ON p.supplierId = s.companyId " +
+            "JOIN InvoiceItem ii ON p.productId = ii.product.productId " +
+            "JOIN p.category c " +
+            "JOIN p.supplier s " +
             "WHERE ii.expirationDate >= CURRENT_DATE " +
-            "GROUP BY p.productId, p.productName, p.hsCode, p.price, c.categoryName, s.companyName " +
+            "GROUP BY p.productId, p.productName, p.hscode, p.salePrice, c.categoryName, s.companyName " +
             "HAVING SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) > 0 " +
             "ORDER BY closestExpiryDate ASC")
-    List<Object[]> findAllProductsWithEarliestExpirationDateSorted(); // assume that quantity in InvoiceItem is updated realtime as products are sold
+    List<Object[]> findAllProductsWithEarliestExpirationDateSorted();
+
+    //    @Query("SELECT p.productId, p.productName, p.hsCode, p.price, c.categoryName, s.companyName as supplierName, " +
+//            "MIN(ii.expirationDate) as closestExpiryDate, " +
+//            "SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) as quantityAtClosestExpiryDate, " +
+//            "SUM(ii.quantity) as totalStock " +
+//            "FROM Product p " +
+//            "JOIN InvoiceItem ii ON p.productId = ii.productId " +
+//            "JOIN Category c ON p.categoryId = c.categoryId " +
+//            "JOIN Company s ON p.supplierId = s.companyId " +
+//            "WHERE ii.expirationDate >= CURRENT_DATE " +
+//            "GROUP BY p.productId, p.productName, p.hsCode, p.price, c.categoryName, s.companyName " +
+//            "HAVING SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) > 0 " +
+//            "ORDER BY closestExpiryDate ASC")
+//    List<Object[]> findAllProductsWithEarliestExpirationDateSorted(); // assume that quantity in InvoiceItem is updated realtime as products are sold
+
 
 }

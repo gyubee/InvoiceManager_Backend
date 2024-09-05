@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,8 +135,7 @@ class ProductControllerTest {
 
     @Test
     void testFindDiscountDetailsByProductId() throws Exception {
-        ItemDiscountDTO dto = new ItemDiscountDTO();
-        dto.setUnitPrice(BigDecimal.valueOf(100));
+        ItemDiscountDTO dto = new ItemDiscountDTO(1, 10.0f, 1, BigDecimal.valueOf(100), LocalDate.now().plusDays(5));
 
         when(invoiceItemService.findDiscountDetailsByProductId(1)).thenReturn(List.of(dto));
 
