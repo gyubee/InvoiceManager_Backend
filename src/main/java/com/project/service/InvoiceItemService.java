@@ -4,6 +4,8 @@ import com.project.dto.ItemDiscountDTO;
 import com.project.repository.InvoiceItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,9 @@ public class InvoiceItemService {
         for (Object[] result : results) {
             Integer invoiceItemId = (Integer) result[0];
             Integer quantity = ((Number) result[1]).intValue();
-            Integer unitPrice = ((Number) result[2]).intValue();
+            BigDecimal unitPrice = ((BigDecimal) result[2]);
             Float discountRate = ((Number) result[3]).floatValue();
-            LocalDate expirationDate = ((java.sql.Date) result[4]).toLocalDate();
+            LocalDate expirationDate = ((LocalDate) result[4]);
 
             ItemDiscountDTO dto = new ItemDiscountDTO();
             dto.setInvoiceItemId(invoiceItemId);

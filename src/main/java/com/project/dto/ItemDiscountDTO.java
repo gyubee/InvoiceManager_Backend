@@ -1,11 +1,12 @@
 package com.project.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ItemDiscountDTO {
     private Integer invoiceItemId;
     private Integer quantity;
-    private Integer unitPrice;
+    private BigDecimal unitPrice;
     private Float discountRate;
     private LocalDate expirationDate;
 
@@ -25,11 +26,11 @@ public class ItemDiscountDTO {
         this.quantity = quantity;
     }
 
-    public Integer getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Integer unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 

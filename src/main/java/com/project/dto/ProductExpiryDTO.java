@@ -1,12 +1,13 @@
 package com.project.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class ProductExpiryDTO {
     private Integer productId;
     private String productName;
     private String hsCode;
-    private Integer price;
+    private BigDecimal price;
     private String categoryName;
     private String supplierName;
     private LocalDate closestExpiryDate;
@@ -38,11 +39,11 @@ public class ProductExpiryDTO {
         this.hsCode = hsCode;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

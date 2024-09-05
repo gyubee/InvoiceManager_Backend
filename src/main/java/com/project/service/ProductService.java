@@ -6,6 +6,7 @@ import com.project.repository.InvoiceItemRepository;
 import com.project.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class ProductService {
             Integer productId = (Integer) result[0];
             String productName = (String) result[1];
             String hsCode = (String) result[2];
-            Integer price = (Integer) result[3];
+            BigDecimal price = (BigDecimal) result[3];
             String categoryName = (String) result[4];
             String supplierName = (String) result[5];
             LocalDate closestExpiryDate = ((java.sql.Date) result[6]).toLocalDate();
