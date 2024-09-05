@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.project.service.InvoiceService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -50,6 +52,64 @@ public class ChatController {
         this.openAiService = openAiService;
     }
 
+    // Static JSON
+    private static final String TEST_JSON1 = """
+    {
+      "company_name": "ABC Exports",
+      "country": "United States",
+      "company_address_postcode": "90807",
+      "order_date": "04 Jul 2022",
+      "total_price": "19,860.00",
+      "products": [
+        {
+          "product_name": "BAR STOOL ALUMINIUM",
+          "hs_code": "3926.00.00",
+          "quantity": 150,
+          "unit_price": "77.20"
+        },
+        {
+          "product_name": "BAR TABLE ALUMINIUM",
+          "hs_code": "3926.00.00",
+          "quantity": 75,
+          "unit_price": "110.40"
+        }
+      ]
+    }
+    """;
+
+
+    private static final String TEST_JSON2 = """
+    {
+        "company_name": "Upela",
+        "country": "France",
+        "company_address_postcode": "75008",
+        "order_date": "22 Feb 2024",
+        "total_price": "230.00",
+
+      "products": [
+        {
+          "product_name": "Painting made with acrylic paint",
+          "hs_code": "4001",
+          "quantity": 1,
+          "unit_price": "80.00"
+        },
+        {
+          "product_name": "Painting made with acrylic paint",
+          "hs_code": "4201 - ",
+          "quantity": 1,
+          "unit_price": "70.00"
+        },
+        {
+          "product_name": "Painting done with gouache",
+          "hs_code": "4401",
+          "quantity": 1,
+          "unit_price": "80.00"
+        }
+      ]
+    }
+    """;
+
+
     @GetMapping("/ai/text")
     public Map generate(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
         return Map.of("response", chatModel.call(message));
@@ -76,6 +136,11 @@ public class ChatController {
             return Map.of("error", "Failed to process the image. Please check the image URL and format.");
         }
     }
+
+
+
+
+
 
 //    @GetMapping("/ai/image/local")
 //    public Map<String, Object> describeImageFromLocal(@RequestParam(defaultValue = "false") boolean save) {
@@ -145,6 +210,19 @@ public class ChatController {
     @GetMapping("/add")
     public String home() {
         return "AAAAAAAAA";
+    }
+
+
+    @GetMapping("/test")
+    public String test1() throws JsonProcessingException {
+
+
+        Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON2, Map.class);
+        invoiceService.saveInvoiceData(invoiceData);
+
+
+
+        return "NNNN";
     }
 
 
