@@ -19,6 +19,7 @@ import org.springframework.ai.openai.api.OpenAiApi;
 import org.springframework.ai.retry.NonTransientAiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
@@ -78,13 +79,13 @@ public class ChatController {
     }
     """;
 
-
     private static final String TEST_JSON2 = """
     {
         "company_name": "Upela",
         "country": "France",
-        "company_address_postcode": "75008",
-        "order_date": "22 Feb 2024",
+        "company_address": "Paris Rd, Paris, France",
+        "company_email": "Upela@email.com",
+        "receive_date": "22 Feb 2024",
         "total_price": "230.00",
 
       "products": [
@@ -111,11 +112,6 @@ public class ChatController {
     """;
 
 
-    @GetMapping("/ai/text")
-    public Map generate(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
-        return Map.of("response", chatModel.call(message));
-    }
-
     @PostMapping(value = "/ai/image/url")
     public Map<String, Object> describeImage(@RequestBody String imageUrl) {
         if (imageUrl == null || imageUrl.isEmpty()) {
@@ -138,12 +134,68 @@ public class ChatController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:63342")
+    @PostMapping("/ai/image/upload")
+    public String describeImage(@RequestParam("image") MultipartFile imageFile) {
+        try {
+            return openAiService.extractInvoice(imageFile);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to process the image", e);
+        }
+    }
+
+    @GetMapping("/test/1")
+    public ResponseEntity<String> test1() {
+        try {
+            Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON1, Map.class);
+            invoiceService.saveInvoiceData(invoiceData);
+
+            return ResponseEntity.ok("Invoice processed successfully");
+
+        } catch (JsonProcessingException e) {
+            logger.error("Error parsing invoice data", e);
+            return ResponseEntity.badRequest().body("Invalid JSON data format");
+
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An unexpected error occurred");
+        }
+    }
+
+    @GetMapping("/test/2")
+    public String test2() throws JsonProcessingException {
+
+        Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON2, Map.class);
+        invoiceService.saveInvoiceData(invoiceData);
+
+        return "NNNN";
+    }
 
 
+//    @GetMapping("/products")
+//    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+//        List<Product> products = invoiceService.getAllProductsDTO();
+//        return ResponseEntity.ok(products);
+//    }
 
+//    @GetMapping("/get/invoices")
+//    public ResponseEntity<List<InvoiceDTO>> getAllInvoices() {
+//        List<InvoiceDTO> invoices = invoiceService.getAllInvoicesDTO();
+//        return ResponseEntity.ok(invoices);
+//    }
+//
+//    @GetMapping("/get/invoices/{id}")
+//    public ResponseEntity<InvoiceDTO> getInvoiceWithProducts(@PathVariable Long id) {
+//        try {
+//            InvoiceDTO invoice = invoiceService.getInvoiceWithProductsDTO(id);
+//            return ResponseEntity.ok(invoice);
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
-
-//    @GetMapping("/ai/image/local")
+    //    @GetMapping("/ai/image/local")
 //    public Map<String, Object> describeImageFromLocal(@RequestParam(defaultValue = "false") boolean save) {
 //        String imagePath = "img/invoice3.png"; // Use relative path within resources
 //        ClassPathResource resource = new ClassPathResource(imagePath);
@@ -197,68 +249,15 @@ public class ChatController {
 //            return Map.of("error", "An unexpected error occurred: " + e.getMessage());
 //        }
 //    }
-
-    @CrossOrigin(origins = "http://localhost:63342")
-    @PostMapping("/ai/image/upload")
-    public String describeImage(@RequestParam("image") MultipartFile imageFile) {
-        try {
-            return openAiService.extractInvoice(imageFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to process the image", e);
-        }
-    }
-
-    @GetMapping("/add")
-    public String home() {
-        return "AAAAAAAAA";
-    }
-
-
-    @GetMapping("/test/1")
-    public String test1() throws JsonProcessingException {
-
-
-        Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON1, Map.class);
-        invoiceService.saveInvoiceData(invoiceData);
-
-
-
-        return "Test 1 Successful";
-    }
-
-    @GetMapping("/test/2")
-    public String test2() throws JsonProcessingException {
-
-
-        Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON2, Map.class);
-        invoiceService.saveInvoiceData(invoiceData);
-
-
-
-        return "NNNN";
-    }
-
-
-//    @GetMapping("/products")
-//    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-//        List<Product> products = invoiceService.getAllProductsDTO();
-//        return ResponseEntity.ok(products);
-//    }
-
-//    @GetMapping("/get/invoices")
-//    public ResponseEntity<List<InvoiceDTO>> getAllInvoices() {
-//        List<InvoiceDTO> invoices = invoiceService.getAllInvoicesDTO();
-//        return ResponseEntity.ok(invoices);
+//
+//    @GetMapping("/ai/text")
+//    public Map generate(@RequestParam(value = "message", defaultValue = "Tell me a joke") String message) {
+//        return Map.of("response", chatModel.call(message));
 //    }
 //
-//    @GetMapping("/get/invoices/{id}")
-//    public ResponseEntity<InvoiceDTO> getInvoiceWithProducts(@PathVariable Long id) {
-//        try {
-//            InvoiceDTO invoice = invoiceService.getInvoiceWithProductsDTO(id);
-//            return ResponseEntity.ok(invoice);
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.notFound().build();
-//        }
+//    @GetMapping("/add")
+//    public String home() {
+//        return "AAAAAAAAA";
 //    }
 
 }
