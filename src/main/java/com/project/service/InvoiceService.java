@@ -63,7 +63,7 @@ public class InvoiceService {
 
     private Company setCompany(Map<String, Object> invoiceData) {
         String companyName = (String) invoiceData.get("company_name");
-        String companyEmail = (String) invoiceData.get("company_email");
+        String companyEmail = (String) invoiceData.get("company_email"); // assume that all invoices has company_email
 
         Company company = companyRepository.findByCompanyNameAndCompanyEmail(companyName, companyEmail)
                 .orElseGet(() -> {
@@ -102,7 +102,7 @@ public class InvoiceService {
                     Product newProduct = new Product();
                     newProduct.setProductName(productName);
                     newProduct.setHscode(hsCode);
-                    newProduct.setSalePrice(new BigDecimal(-1));
+                    newProduct.setSalePrice(new BigDecimal(-1)); // value needs to be treated by admin later on
                     newProduct.setSupplier(supplier);
 
                     Category category = setCategory("Default");
