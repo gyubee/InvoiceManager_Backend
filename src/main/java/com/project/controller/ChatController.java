@@ -57,8 +57,9 @@ public class ChatController {
     {
       "company_name": "ABC Exports",
       "country": "United States",
-      "company_address_postcode": "90807",
-      "order_date": "04 Jul 2022",
+      "company_address": "example Rd, California, USA",
+      "company_email": "company@email.com",
+      "receive_date": "04 Jul 2022",
       "total_price": "19,860.00",
       "products": [
         {
@@ -213,8 +214,20 @@ public class ChatController {
     }
 
 
-    @GetMapping("/test")
+    @GetMapping("/test/1")
     public String test1() throws JsonProcessingException {
+
+
+        Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON1, Map.class);
+        invoiceService.saveInvoiceData(invoiceData);
+
+
+
+        return "Test 1 Successful";
+    }
+
+    @GetMapping("/test/2")
+    public String test2() throws JsonProcessingException {
 
 
         Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON2, Map.class);

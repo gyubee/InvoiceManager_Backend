@@ -1,5 +1,6 @@
 package com.project.repository;
 
+import com.project.entity.Company;
 import com.project.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    Optional<Product> findByProductName(String productName);
+    Optional<Product> findByProductNameAndHscodeAndSupplier(String productName, String hsCode, Company company);
 
     // STOCK related methods
     //Products sorted by stock
