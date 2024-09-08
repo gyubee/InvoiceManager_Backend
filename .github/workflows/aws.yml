@@ -17,12 +17,15 @@ jobs:
       run: |
         echo "Setting up SSH key"
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        echo "Copying source code to EC2"
-        scp -r -i private_key -o StrictHostKeyChecking=no * ${USER}@${HOST}:~/app/
-        scp -r -i private_key -o StrictHostKeyChecking=no .* ${USER}@${HOST}:~/app/
+        echo "Compressing source code"
+        tar czf app.tar.gz *
+        echo "Copying compressed source code to EC2"
+        scp -i private_key -o StrictHostKeyChecking=no app.tar.gz ${USER}@${HOST}:~/app/
         echo "Executing commands on EC2"
         ssh -i private_key -o StrictHostKeyChecking=no ${USER}@${HOST} '
           cd ~/app
-          echo "Source code copied successfully"
+          tar xzf app.tar.gz
+          rm app.tar.gz
+          echo "Source code copied and extracted successfully"
           ls -la
         '
