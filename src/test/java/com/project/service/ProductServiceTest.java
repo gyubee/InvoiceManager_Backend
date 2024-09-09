@@ -83,7 +83,7 @@ class ProductServiceTest {
                         1, // productId
                         "Product A", // productName
                         "1234", // hsCode
-                        100, // price
+                        BigDecimal.valueOf(100), // price
                         "Category A", // categoryName
                         "Supplier A", // supplierName
                         Date.valueOf(LocalDate.now().plusDays(5)), // closestExpiryDate
@@ -94,7 +94,7 @@ class ProductServiceTest {
                         2, // productId
                         "Product B", // productName
                         "5678", // hsCode
-                        150, // price
+                        BigDecimal.valueOf(150), // price
                         "Category B", // categoryName
                         "Supplier B", // supplierName
                         Date.valueOf(LocalDate.now().plusDays(10)), // closestExpiryDate
@@ -105,7 +105,7 @@ class ProductServiceTest {
                         3, // productId
                         "Product C", // productName
                         "91011", // hsCode
-                        200, // price
+                        BigDecimal.valueOf(200), // price
                         "Category C", // categoryName
                         "Supplier C", // supplierName
                         Date.valueOf(LocalDate.now().plusDays(15)), // closestExpiryDate
@@ -127,7 +127,7 @@ class ProductServiceTest {
         assertEquals(1, dto1.getProductId());
         assertEquals("Product A", dto1.getProductName());
         assertEquals("1234", dto1.getHsCode());
-        assertEquals(100, dto1.getPrice());
+        assertEquals(0, BigDecimal.valueOf(100).compareTo(dto1.getPrice()));
         assertEquals("Category A", dto1.getCategoryName());
         assertEquals("Supplier A", dto1.getSupplierName());
         assertEquals(LocalDate.now().plusDays(5), dto1.getClosestExpiryDate());
@@ -138,7 +138,7 @@ class ProductServiceTest {
         assertEquals(2, dto2.getProductId());
         assertEquals("Product B", dto2.getProductName());
         assertEquals("5678", dto2.getHsCode());
-        assertEquals(150, dto2.getPrice());
+        assertEquals(0, BigDecimal.valueOf(150).compareTo(dto2.getPrice()));
         assertEquals("Category B", dto2.getCategoryName());
         assertEquals("Supplier B", dto2.getSupplierName());
         assertEquals(LocalDate.now().plusDays(10), dto2.getClosestExpiryDate());
@@ -149,7 +149,7 @@ class ProductServiceTest {
         assertEquals(3, dto3.getProductId());
         assertEquals("Product C", dto3.getProductName());
         assertEquals("91011", dto3.getHsCode());
-        assertEquals(200, dto3.getPrice());
+        assertEquals(0, BigDecimal.valueOf(200).compareTo(dto3.getPrice()));
         assertEquals("Category C", dto3.getCategoryName());
         assertEquals("Supplier C", dto3.getSupplierName());
         assertEquals(LocalDate.now().plusDays(15), dto3.getClosestExpiryDate());

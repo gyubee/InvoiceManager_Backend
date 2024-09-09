@@ -1,5 +1,7 @@
 package com.project.repository;
 
+import com.project.dto.ItemDiscountDTO;
+import com.project.entity.Discount;
 import com.project.entity.InvoiceItem;
 import com.project.entity.Product;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,28 +38,45 @@ class InvoiceItemRepositoryTest {
         product.setProductName("Test Product");
 
         invoiceItem = new InvoiceItem();
-        invoiceItem.setProduct(product);  // Set the entire product entity
+        invoiceItem.setProduct(product);
         invoiceItem.setExpirationDate(LocalDate.now().plusDays(5));
         invoiceItem.setQuantity(10);
         invoiceItem.setUnitPrice(BigDecimal.valueOf(100));
     }
 
 
-//    @Test
-//    void testFindDiscountDetailsByProductId() {
-//        List<Object[]> mockResult = Arrays.asList(
-//                new Object[]{1, 10, BigDecimal.valueOf(100), 0, LocalDate.now().plusDays(5)},
-//                new Object[]{2, 5, BigDecimal.valueOf(150), 10, LocalDate.now().plusDays(10)}
-//        );
-//
-//        when(invoiceItemRepository.findDiscountDetailsByProductId(1))
-//                .thenReturn(mockResult);
-//
-//        List<Object[]> result = invoiceItemRepository.findDiscountDetailsByProductId(1);
-//
-//        assertFalse(result.isEmpty());
-//        assertEquals(BigDecimal.valueOf(100), result.get(0)[2]); // Unit price
-//    }
+    @Test
+    void testFindDiscountDetailsByProductId() {
+        // Given
+        Integer productId = 1;
+        Discount discount = new Discount();
+        discount.setDiscountRate(0.1f);
+
+        ItemDiscountDTO itemDiscountDTO = new ItemDiscountDTO(
+                invoiceItem.getInvoiceItemId(),
+                discount.getDiscountRate(),
+                invoiceItem.getQuantity(),
+                invoiceItem.getUnitPrice(),
+                invoiceItem.getExpirationDate()
+        );
+
+        List<ItemDiscountDTO> expectedDiscountDetails = new ArrayList<>();
+        expectedDiscountDetails.add(itemDiscountDTO);
+
+        when(invoiceItemRepository.findDiscountDetailsByProductId(productId))
+                .thenReturn(expectedDiscountDetails);
+
+        // When
+        List<ItemDiscountDTO> actualDiscountDetails = invoiceItemRepository.findDiscountDetailsByProductId(productId);
+
+        // Then
+        assertEquals(expectedDiscountDetails.size(), actualDiscountDetails.size());
+        assertEquals(expectedDiscountDetails.get(0).getInvoiceItemId(), actualDiscountDetails.get(0).getInvoiceItemId());
+        assertEquals(expectedDiscountDetails.get(0).getDiscountRate(), actualDiscountDetails.get(0).getDiscountRate());
+        assertEquals(expectedDiscountDetails.get(0).getQuantity(), actualDiscountDetails.get(0).getQuantity());
+        assertEquals(expectedDiscountDetails.get(0).getUnitPrice(), actualDiscountDetails.get(0).getUnitPrice());
+        assertEquals(expectedDiscountDetails.get(0).getExpirationDate(), actualDiscountDetails.get(0).getExpirationDate());
+    }
 
 
     @Test
