@@ -81,7 +81,10 @@ public class ProductService {
             BigDecimal price = (BigDecimal) result[3];
             String categoryName = (String) result[4];
             String supplierName = (String) result[5];
-            LocalDate closestExpiryDate = ((java.sql.Date) result[6]).toLocalDate();
+            LocalDate closestExpiryDate = null;
+            if (result[6] != null) {
+                closestExpiryDate = ((LocalDate) result[6]);
+            }
             Integer quantityAtClosestExpiryDate = ((Number) result[7]).intValue();
             Integer totalStock = ((Number) result[8]).intValue();
 

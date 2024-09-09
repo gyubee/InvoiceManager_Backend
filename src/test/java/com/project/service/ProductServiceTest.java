@@ -86,7 +86,7 @@ class ProductServiceTest {
                         BigDecimal.valueOf(100), // price
                         "Category A", // categoryName
                         "Supplier A", // supplierName
-                        Date.valueOf(LocalDate.now().plusDays(5)), // closestExpiryDate
+                        LocalDate.now().plusDays(5), // closestExpiryDate
                         10, // quantityAtClosestExpiryDate
                         20 // totalStock
                 },
@@ -97,7 +97,7 @@ class ProductServiceTest {
                         BigDecimal.valueOf(150), // price
                         "Category B", // categoryName
                         "Supplier B", // supplierName
-                        Date.valueOf(LocalDate.now().plusDays(10)), // closestExpiryDate
+                        LocalDate.now().plusDays(10), // closestExpiryDate
                         15, // quantityAtClosestExpiryDate
                         30 // totalStock
                 },
@@ -108,7 +108,7 @@ class ProductServiceTest {
                         BigDecimal.valueOf(200), // price
                         "Category C", // categoryName
                         "Supplier C", // supplierName
-                        Date.valueOf(LocalDate.now().plusDays(15)), // closestExpiryDate
+                        LocalDate.now().plusDays(15), // closestExpiryDate
                         5, // quantityAtClosestExpiryDate
                         25 // totalStock
                 }

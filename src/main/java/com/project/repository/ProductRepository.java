@@ -30,16 +30,17 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     // All product with the earliest expiration date first
     @Query("SELECT p.productId, p.productName, p.hscode, p.salePrice, c.categoryName, s.companyName as supplierName, " +
             "MIN(ii.expirationDate) as closestExpiryDate, " +
-            "SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) as quantityAtClosestExpiryDate, " +
+            "SUM(CASE WHEN ii.expirationDate = (SELECT MIN(ii2.expirationDate) FROM InvoiceItem ii2 WHERE ii2.product.productId = p.productId AND ii2.expirationDate >= CURRENT_DATE) THEN ii.quantity ELSE 0 END) as quantityAtClosestExpiryDate, " +
             "SUM(ii.quantity) as totalStock " +
             "FROM Product p " +
             "JOIN InvoiceItem ii ON p.productId = ii.product.productId " +
             "JOIN p.category c " +
             "JOIN p.supplier s " +
-            "WHERE ii.expirationDate >= CURRENT_DATE " +
+            "WHERE ii.expirationDate >= CURRENT_DATE OR ii.expirationDate IS NULL " +
             "GROUP BY p.productId, p.productName, p.hscode, p.salePrice, c.categoryName, s.companyName " +
-            "HAVING SUM(CASE WHEN ii.expirationDate = MIN(ii.expirationDate) THEN ii.quantity ELSE 0 END) > 0 " +
-            "ORDER BY closestExpiryDate ASC")
+            "ORDER BY " +
+            "CASE WHEN MIN(ii.expirationDate) IS NULL THEN 1 ELSE 0 END, " +
+            "CASE WHEN MIN(ii.expirationDate) IS NULL THEN SUM(ii.quantity) ELSE MIN(ii.expirationDate) END ASC")
     List<Object[]> findAllProductsWithEarliestExpirationDateSorted();
 
     //    @Query("SELECT p.productId, p.productName, p.hsCode, p.price, c.categoryName, s.companyName as supplierName, " +
