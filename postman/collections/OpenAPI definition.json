@@ -1,0 +1,1827 @@
+{
+	"info": {
+		"_postman_id": "047aed5d-4538-4986-9cdc-a9d24f7e927f",
+		"name": "OpenAPI definition",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "27869827-047aed5d-4538-4986-9cdc-a9d24f7e927f"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "get User By Id",
+							"id": "b38d67d4-a052-413e-8342-a20456276126",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "8da3d22f-6f0b-47e0-bc24-650264d1fc0c",
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"uuid": "1b199bde-726e-437a-9303-b2e8a3eacd0f"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update User",
+							"id": "4ba23d72-c84e-4122-a50d-8a27567631da",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "146297e7-976a-4044-965f-c1f3360f4cda",
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"uuid": "1d1f0e59-21ed-4f21-811d-31d9abee10fd"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete User",
+							"id": "2474a5fd-28a7-4cf0-888f-84b73e8c9be9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "6ed6af3e-4dda-4709-aa26-410b61e685dd",
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					],
+					"id": "6e3a4cc2-64ca-46a1-a1fc-eeb7c7d89ba0"
+				},
+				{
+					"name": "get All Users",
+					"id": "b5d93fd2-13d8-4739-8022-4a23d379b4e9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "6dba63d7-b199-4730-8d1f-4750847ae073",
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"uuid": "942d337d-038e-432d-acfd-7435cb5e1319"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"userEmail\": \"<string>\",\n    \"userPassword\": \"<string>\",\n    \"userName\": \"<string>\",\n    \"marketSize\": \"<integer>\",\n    \"userRole\": \"<string>\",\n    \"socialType\": \"APPLE\",\n    \"socialId\": \"<string>\",\n    \"refreshToken\": \"<string>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"userEmail\": \"<string>\",\n    \"userPassword\": \"<string>\",\n    \"userName\": \"<string>\",\n    \"marketSize\": \"<integer>\",\n    \"userRole\": \"<string>\",\n    \"socialType\": \"APPLE\",\n    \"socialId\": \"<string>\",\n    \"refreshToken\": \"<string>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "create User",
+					"id": "c852bcdf-a48f-4899-b6a9-e282b147c0c0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3897ed62-313e-42e8-a833-dcf949293fbd",
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"uuid": "2d13077e-711a-4208-9b5e-651f5310d6ae"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<long>\",\n  \"userEmail\": \"<string>\",\n  \"userPassword\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"marketSize\": \"<integer>\",\n  \"userRole\": \"<string>\",\n  \"socialType\": \"APPLE\",\n  \"socialId\": \"<string>\",\n  \"refreshToken\": \"<string>\"\n}"
+						}
+					]
+				}
+			],
+			"id": "8046783d-7288-4dd1-a40a-ee7abeccf40c"
+		},
+		{
+			"name": "invoicemanager",
+			"item": [
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "{productId}",
+							"item": [
+								{
+									"name": "stock",
+									"item": [
+										{
+											"name": "Get stock by product ID",
+											"id": "bac365aa-fa0e-4317-a08a-964db49e2972",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/:productId/stock",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														":productId",
+														"stock"
+													],
+													"variable": [
+														{
+															"key": "productId",
+															"value": "<integer>",
+															"description": "(Required) ID of the product to check stock for"
+														}
+													]
+												},
+												"description": "Retrieve the stock quantity for a specific product."
+											},
+											"response": [
+												{
+													"id": "d8d0843e-10e9-4e7c-969e-011f7be570b9",
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/:productId/stock",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																":productId",
+																"stock"
+															],
+															"variable": [
+																{
+																	"key": "productId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "84a977d7-553d-4524-916b-80815a957c80"
+														}
+													],
+													"cookie": [],
+													"body": "<integer>"
+												}
+											]
+										},
+										{
+											"name": "Update product stock",
+											"id": "a730b835-bb5e-4182-b523-b5746a8afd38",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/:productId/stock?newStock=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														":productId",
+														"stock"
+													],
+													"query": [
+														{
+															"key": "newStock",
+															"value": "<integer>",
+															"description": "(Required) New stock quantity"
+														}
+													],
+													"variable": [
+														{
+															"key": "productId",
+															"value": "<integer>",
+															"description": "(Required) ID of the product to update"
+														}
+													]
+												},
+												"description": "Update the stock quantity for a specific product."
+											},
+											"response": [
+												{
+													"id": "19df51c2-dc7d-4f30-9516-d851bb6964d5",
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/:productId/stock?newStock=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																":productId",
+																"stock"
+															],
+															"query": [
+																{
+																	"description": "(Required) New stock quantity",
+																	"key": "newStock",
+																	"value": "<integer>"
+																}
+															],
+															"variable": [
+																{
+																	"key": "productId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "2fb1a989-f2b7-44df-aef2-e56354264132"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"productId\": \"<integer>\",\n  \"productName\": \"<string>\",\n  \"hscode\": \"<string>\",\n  \"salePrice\": \"<number>\",\n  \"stock\": \"<integer>\",\n  \"category\": {\n    \"categoryId\": \"<integer>\",\n    \"categoryName\": \"<string>\"\n  },\n  \"supplier\": {\n    \"companyId\": \"<integer>\",\n    \"companyName\": \"<string>\",\n    \"companyAddress\": \"<string>\",\n    \"companyEmail\": \"<string>\"\n  }\n}"
+												}
+											]
+										}
+									],
+									"id": "e8f815bd-9223-4680-a4cd-6bb4ca2f5897"
+								},
+								{
+									"name": "{invoiceItemId}",
+									"item": [
+										{
+											"name": "discounts",
+											"item": [
+												{
+													"name": "apply",
+													"item": [
+														{
+															"name": "Apply discount to an item",
+															"id": "c44322ed-a035-4aa7-9dbe-ebc705b38a0b",
+															"protocolProfileBehavior": {
+																"disableBodyPruning": true
+															},
+															"request": {
+																"method": "POST",
+																"header": [
+																	{
+																		"key": "Accept",
+																		"value": "application/json"
+																	}
+																],
+																"url": {
+																	"raw": "{{baseUrl}}/invoicemanager/products/:productId/:invoiceItemId/discounts/apply?discountRate=<float>",
+																	"host": [
+																		"{{baseUrl}}"
+																	],
+																	"path": [
+																		"invoicemanager",
+																		"products",
+																		":productId",
+																		":invoiceItemId",
+																		"discounts",
+																		"apply"
+																	],
+																	"query": [
+																		{
+																			"key": "discountRate",
+																			"value": "<float>",
+																			"description": "(Required) Discount rate to apply"
+																		}
+																	],
+																	"variable": [
+																		{
+																			"key": "productId",
+																			"value": "<integer>",
+																			"description": "(Required) ID of the product"
+																		},
+																		{
+																			"key": "invoiceItemId",
+																			"value": "<integer>",
+																			"description": "(Required) ID of the invoice item"
+																		}
+																	]
+																},
+																"description": "Apply a discount to a specific item with certain expiry date."
+															},
+															"response": [
+																{
+																	"id": "7979bd13-3116-49af-bf0c-4d148b5b9d9c",
+																	"name": "Discount applied successfully.",
+																	"originalRequest": {
+																		"method": "POST",
+																		"header": [
+																			{
+																				"key": "Accept",
+																				"value": "application/json"
+																			}
+																		],
+																		"url": {
+																			"raw": "{{baseUrl}}/invoicemanager/products/:productId/:invoiceItemId/discounts/apply?discountRate=<float>",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"invoicemanager",
+																				"products",
+																				":productId",
+																				":invoiceItemId",
+																				"discounts",
+																				"apply"
+																			],
+																			"query": [
+																				{
+																					"description": "(Required) Discount rate to apply",
+																					"key": "discountRate",
+																					"value": "<float>"
+																				}
+																			],
+																			"variable": [
+																				{
+																					"key": "productId"
+																				},
+																				{
+																					"key": "invoiceItemId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "OK",
+																	"code": 200,
+																	"_postman_previewlanguage": "json",
+																	"header": [
+																		{
+																			"key": "Content-Type",
+																			"value": "application/json",
+																			"uuid": "a9669d4d-6873-40d9-b70c-7389199536bc"
+																		}
+																	],
+																	"cookie": [],
+																	"body": "<string>"
+																},
+																{
+																	"id": "ca6a0c38-5f7a-401d-9c9a-c8d7815c1d15",
+																	"name": "Product or invoice item not found.",
+																	"originalRequest": {
+																		"method": "POST",
+																		"header": [
+																			{
+																				"key": "Accept",
+																				"value": "application/json"
+																			}
+																		],
+																		"url": {
+																			"raw": "{{baseUrl}}/invoicemanager/products/:productId/:invoiceItemId/discounts/apply?discountRate=<float>",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"invoicemanager",
+																				"products",
+																				":productId",
+																				":invoiceItemId",
+																				"discounts",
+																				"apply"
+																			],
+																			"query": [
+																				{
+																					"description": "(Required) Discount rate to apply",
+																					"key": "discountRate",
+																					"value": "<float>"
+																				}
+																			],
+																			"variable": [
+																				{
+																					"key": "productId"
+																				},
+																				{
+																					"key": "invoiceItemId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "Not Found",
+																	"code": 404,
+																	"_postman_previewlanguage": "json",
+																	"header": [
+																		{
+																			"key": "Content-Type",
+																			"value": "application/json",
+																			"uuid": "07950d82-0bd0-4dbb-89d0-101f4eda443c"
+																		}
+																	],
+																	"cookie": [],
+																	"body": "<string>"
+																},
+																{
+																	"id": "b6969b96-3b62-4681-a90c-8ccf9e26ea62",
+																	"name": "Internal server error.",
+																	"originalRequest": {
+																		"method": "POST",
+																		"header": [
+																			{
+																				"key": "Accept",
+																				"value": "application/json"
+																			}
+																		],
+																		"url": {
+																			"raw": "{{baseUrl}}/invoicemanager/products/:productId/:invoiceItemId/discounts/apply?discountRate=<float>",
+																			"host": [
+																				"{{baseUrl}}"
+																			],
+																			"path": [
+																				"invoicemanager",
+																				"products",
+																				":productId",
+																				":invoiceItemId",
+																				"discounts",
+																				"apply"
+																			],
+																			"query": [
+																				{
+																					"description": "(Required) Discount rate to apply",
+																					"key": "discountRate",
+																					"value": "<float>"
+																				}
+																			],
+																			"variable": [
+																				{
+																					"key": "productId"
+																				},
+																				{
+																					"key": "invoiceItemId"
+																				}
+																			]
+																		}
+																	},
+																	"status": "Internal Server Error",
+																	"code": 500,
+																	"_postman_previewlanguage": "json",
+																	"header": [
+																		{
+																			"key": "Content-Type",
+																			"value": "application/json",
+																			"uuid": "5782689b-acf1-4c28-a65d-db222720a996"
+																		}
+																	],
+																	"cookie": [],
+																	"body": "<string>"
+																}
+															]
+														}
+													],
+													"id": "4b0a91a1-9cd6-4275-b896-ed8b77d7c932"
+												}
+											],
+											"id": "6c079909-8dba-4499-9b46-997745d9a736"
+										}
+									],
+									"id": "3db1e011-aad1-412c-89b8-ffabe76c3d69"
+								},
+								{
+									"name": "expiry",
+									"item": [
+										{
+											"name": "Get discount details by product ID",
+											"id": "b74f6ac1-bd3b-4bdf-9b29-df34cf4a4536",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/:productId/expiry",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														":productId",
+														"expiry"
+													],
+													"variable": [
+														{
+															"key": "productId",
+															"value": "<integer>",
+															"description": "(Required) ID of the product to retrieve discount details for"
+														}
+													]
+												},
+												"description": "Retrieve discount details needed for discount managing a specific product."
+											},
+											"response": [
+												{
+													"id": "e8fd349b-a63b-4213-8b32-0b443cc258a4",
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/:productId/expiry",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																":productId",
+																"expiry"
+															],
+															"variable": [
+																{
+																	"key": "productId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "8e852b41-27cb-4908-acbd-2394dc3a4655"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"invoiceItemId\": \"<integer>\",\n    \"quantity\": \"<integer>\",\n    \"unitPrice\": \"<number>\",\n    \"discountRate\": \"<float>\",\n    \"expirationDate\": \"<date>\"\n  },\n  {\n    \"invoiceItemId\": \"<integer>\",\n    \"quantity\": \"<integer>\",\n    \"unitPrice\": \"<number>\",\n    \"discountRate\": \"<float>\",\n    \"expirationDate\": \"<date>\"\n  }\n]"
+												}
+											]
+										}
+									],
+									"id": "3c960bf0-d82d-4de7-a573-2749a50dbedd"
+								}
+							],
+							"id": "f5f21c73-85d2-446e-9a87-c307b507cf15"
+						},
+						{
+							"name": "discount",
+							"item": [
+								{
+									"name": "global",
+									"item": [
+										{
+											"name": "Apply global discount based on expiry",
+											"id": "956bf6e4-54f0-4f1e-a170-634ebc1f9d57",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/discount/global?daysLeftTillExpire=<integer>&discountRate=<float>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														"discount",
+														"global"
+													],
+													"query": [
+														{
+															"key": "daysLeftTillExpire",
+															"value": "<integer>",
+															"description": "(Required) Number of days left until expiry"
+														},
+														{
+															"key": "discountRate",
+															"value": "<float>",
+															"description": "(Required) Discount rate to apply globally"
+														}
+													]
+												},
+												"description": "Apply a global discount to all products based on their expiration date(this will be added to all item products that apply and created in discount table)."
+											},
+											"response": [
+												{
+													"id": "50623a74-dd4f-451c-a383-7b92999c6d66",
+													"name": "Global discount applied successfully.",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/discount/global?daysLeftTillExpire=<integer>&discountRate=<float>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																"discount",
+																"global"
+															],
+															"query": [
+																{
+																	"description": "(Required) Number of days left until expiry",
+																	"key": "daysLeftTillExpire",
+																	"value": "<integer>"
+																},
+																{
+																	"description": "(Required) Discount rate to apply globally",
+																	"key": "discountRate",
+																	"value": "<float>"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "b007d2ab-279b-479c-8553-561b5fd8bbe9"
+														}
+													],
+													"cookie": [],
+													"body": "<string>"
+												},
+												{
+													"id": "229b1022-fe5a-43d4-92be-f98a99d0f59f",
+													"name": "Internal server error.",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/discount/global?daysLeftTillExpire=<integer>&discountRate=<float>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																"discount",
+																"global"
+															],
+															"query": [
+																{
+																	"description": "(Required) Number of days left until expiry",
+																	"key": "daysLeftTillExpire",
+																	"value": "<integer>"
+																},
+																{
+																	"description": "(Required) Discount rate to apply globally",
+																	"key": "discountRate",
+																	"value": "<float>"
+																}
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "f8ef3f08-cf4d-4050-bfc6-c4a41461e147"
+														}
+													],
+													"cookie": [],
+													"body": "<string>"
+												}
+											]
+										}
+									],
+									"id": "86c96452-a891-4768-b844-4152827aafad"
+								}
+							],
+							"id": "681a116d-f452-4d91-be16-d317bdfdf839"
+						},
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get product by ID",
+									"id": "97cf16a4-7d8d-4e2d-a355-5a06d6d13044",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoicemanager/products/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoicemanager",
+												"products",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<integer>",
+													"description": "(Required) ID of the product to retrieve"
+												}
+											]
+										},
+										"description": "Retrieve a product by its ID."
+									},
+									"response": [
+										{
+											"id": "12ddb9bb-b297-411d-8447-7dcdadd6b89e",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "7d092ae9-cdbe-4cf7-82dd-b844d6416d3a"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"productId\": \"<integer>\",\n  \"productName\": \"<string>\",\n  \"hscode\": \"<string>\",\n  \"salePrice\": \"<number>\",\n  \"stock\": \"<integer>\",\n  \"category\": {\n    \"categoryId\": \"<integer>\",\n    \"categoryName\": \"<string>\"\n  },\n  \"supplier\": {\n    \"companyId\": \"<integer>\",\n    \"companyName\": \"<string>\",\n    \"companyAddress\": \"<string>\",\n    \"companyEmail\": \"<string>\"\n  }\n}"
+										}
+									]
+								}
+							],
+							"id": "714419f3-34f7-4787-9f13-6bb898bfbe7c"
+						},
+						{
+							"name": "stock",
+							"item": [
+								{
+									"name": "Get all products sorted by stock ascending",
+									"id": "abd435ae-5886-4138-b28e-fea6c2ec76de",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoicemanager/products/stock",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoicemanager",
+												"products",
+												"stock"
+											]
+										},
+										"description": "Retrieve all products sorted by stock ascending."
+									},
+									"response": [
+										{
+											"id": "5e4669ae-e18a-4be7-950d-f0cefc560660",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/stock",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														"stock"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "43e93f45-4e12-49b6-a5e5-0b1f9604c61e"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  },\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  }\n]"
+										}
+									]
+								}
+							],
+							"id": "b5f36d2e-a6eb-48eb-9eb8-3064856b1564"
+						},
+						{
+							"name": "expiry",
+							"item": [
+								{
+									"name": "Get all products with closest expiry date first",
+									"id": "5d333dbb-a0fe-47d3-99b3-6c818ae1fd45",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoicemanager/products/expiry",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoicemanager",
+												"products",
+												"expiry"
+											]
+										},
+										"description": "Retrieve a list of products with the closest expiry dates(not considering past expiration date)."
+									},
+									"response": [
+										{
+											"id": "7322a2a9-ac0d-4aa6-bd42-52791fc966cb",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/expiry",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														"expiry"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "7e7764c9-6221-41f2-8f0a-c13794daf5d6"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hsCode\": \"<string>\",\n    \"price\": \"<number>\",\n    \"categoryName\": \"<string>\",\n    \"supplierName\": \"<string>\",\n    \"closestExpiryDate\": \"<date>\",\n    \"quantityAtClosestExpiryDate\": \"<integer>\",\n    \"totalStock\": \"<integer>\"\n  },\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hsCode\": \"<string>\",\n    \"price\": \"<number>\",\n    \"categoryName\": \"<string>\",\n    \"supplierName\": \"<string>\",\n    \"closestExpiryDate\": \"<date>\",\n    \"quantityAtClosestExpiryDate\": \"<integer>\",\n    \"totalStock\": \"<integer>\"\n  }\n]"
+										}
+									]
+								}
+							],
+							"id": "eb0e61c4-4d9e-423d-a6c0-41540374577d"
+						},
+						{
+							"name": "all",
+							"item": [
+								{
+									"name": "available",
+									"item": [
+										{
+											"name": "Get all products with stock available",
+											"id": "bd2cc1f1-384c-4b33-acc7-1c614723aaf0",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/all/available",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														"all",
+														"available"
+													]
+												},
+												"description": "Retrieve all products that have stock available(stock > 0)."
+											},
+											"response": [
+												{
+													"id": "459ff2ce-9ee6-4c92-aeee-4c03ed9ae068",
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/invoicemanager/products/all/available",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoicemanager",
+																"products",
+																"all",
+																"available"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "8399025a-eff3-4f90-9f3b-256147bb8f8b"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  },\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  }\n]"
+												}
+											]
+										}
+									],
+									"id": "74366f58-e409-44e0-b89c-fdd85b5cff14"
+								},
+								{
+									"name": "Get all products",
+									"id": "b2ba0363-54eb-49e4-8237-f9c6085e2066",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoicemanager/products/all",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoicemanager",
+												"products",
+												"all"
+											]
+										},
+										"description": "Retrieve a list of all products."
+									},
+									"response": [
+										{
+											"id": "e8b216f4-0d2e-4328-aff0-9e02e46daeee",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoicemanager/products/all",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoicemanager",
+														"products",
+														"all"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "411e609e-a1a9-4a58-8ff4-5e079735c185"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  },\n  {\n    \"productId\": \"<integer>\",\n    \"productName\": \"<string>\",\n    \"hscode\": \"<string>\",\n    \"salePrice\": \"<number>\",\n    \"stock\": \"<integer>\",\n    \"category\": {\n      \"categoryId\": \"<integer>\",\n      \"categoryName\": \"<string>\"\n    },\n    \"supplier\": {\n      \"companyId\": \"<integer>\",\n      \"companyName\": \"<string>\",\n      \"companyAddress\": \"<string>\",\n      \"companyEmail\": \"<string>\"\n    }\n  }\n]"
+										}
+									]
+								}
+							],
+							"id": "dbcc6034-242c-4777-b9c1-25ec3be5a035"
+						}
+					],
+					"id": "2bda1459-c444-4a61-bb99-8ac7e55a27ea"
+				}
+			],
+			"id": "3063a1de-0e5e-443a-9cd7-13207df8222d"
+		},
+		{
+			"name": "invoice",
+			"item": [
+				{
+					"name": "ai",
+					"item": [
+						{
+							"name": "image",
+							"item": [
+								{
+									"name": "url",
+									"item": [
+										{
+											"name": "describe Image",
+											"id": "0bf3f7d6-c131-46df-8d97-2ebdbb5fbb46",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "<string>",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/invoice/ai/image/url",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoice",
+														"ai",
+														"image",
+														"url"
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "4479e84c-e699-4925-bded-a339861a6d0e",
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "<string>",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/invoice/ai/image/url",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoice",
+																"ai",
+																"image",
+																"url"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "f494de87-db36-4793-a973-147e88fa83d7"
+														}
+													],
+													"cookie": [],
+													"body": "{\n  \"in_bc5\": {},\n  \"esse2d\": {},\n  \"elit_0\": {},\n  \"fugiat4\": {}\n}"
+												}
+											]
+										}
+									],
+									"id": "d6b60551-f39d-4c8f-88a6-70ec35104425"
+								},
+								{
+									"name": "upload",
+									"item": [
+										{
+											"name": "describe Image 1",
+											"id": "3cf66703-db97-4072-adc0-af78b1278648",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"image\": \"<binary>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/invoice/ai/image/upload",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoice",
+														"ai",
+														"image",
+														"upload"
+													]
+												}
+											},
+											"response": [
+												{
+													"id": "50a582ac-3696-40f8-ad99-865c735d5d27",
+													"name": "OK",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"image\": \"<binary>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/invoice/ai/image/upload",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"invoice",
+																"ai",
+																"image",
+																"upload"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json",
+															"uuid": "fb91f8f0-8ef4-4b80-bb6e-39ef569ae0f2"
+														}
+													],
+													"cookie": [],
+													"body": "<string>"
+												}
+											]
+										}
+									],
+									"id": "39f43f6e-2247-4f1c-ae05-673c236101ab"
+								}
+							],
+							"id": "7a7acd9d-3b84-4e6b-8991-24900fc44161"
+						}
+					],
+					"id": "618756cc-8b33-4978-a0ad-f802687d3db2"
+				},
+				{
+					"name": "test",
+					"item": [
+						{
+							"name": "2",
+							"item": [
+								{
+									"name": "test2",
+									"id": "769698cf-3179-44ab-ac45-0c2713062e12",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoice/test/2",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoice",
+												"test",
+												"2"
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "485d6ad0-00f4-4ddc-b4f4-7418712080d5",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoice/test/2",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoice",
+														"test",
+														"2"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "4f2a7d21-7d59-47ba-b84d-d643450807f7"
+												}
+											],
+											"cookie": [],
+											"body": "<string>"
+										}
+									]
+								}
+							],
+							"id": "2addff1e-85db-43f2-9c87-3bcad375694a"
+						},
+						{
+							"name": "1",
+							"item": [
+								{
+									"name": "test1",
+									"id": "849e620c-cc28-4dbd-b369-ab54f215a640",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/invoice/test/1",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"invoice",
+												"test",
+												"1"
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "4f054e07-9cd6-4002-a847-b50b14276414",
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/invoice/test/1",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"invoice",
+														"test",
+														"1"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json",
+													"uuid": "cf162b38-033b-4506-b070-48e41deba7e8"
+												}
+											],
+											"cookie": [],
+											"body": "<string>"
+										}
+									]
+								}
+							],
+							"id": "0cdc90c6-b78b-4184-8364-6b0e1b81c322"
+						}
+					],
+					"id": "b1e773dd-cbef-4d5a-932a-07ecb612d3b6"
+				}
+			],
+			"id": "76afeb92-4e04-47a3-8bf3-e46bee2e088c"
+		}
+	],
+	"variable": [
+		{
+			"id": "290bfdb1-986e-4889-a0db-910bb397ce98",
+			"key": "baseUrl",
+			"value": "http://localhost:8001"
+		}
+	]
+}
