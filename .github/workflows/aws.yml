@@ -1,5 +1,5 @@
 name: Java CI/CD
-# test2
+# test3
 on:
   pull_request:
     types: [closed]
@@ -40,6 +40,14 @@ jobs:
           # Copy environment files from ~/env to ~/app/src/main/resources
           cp ~/env/* src/main/resources/
           echo "Environment files copied successfully"
+          
+          # Build the application
+          ./gradlew build
+          echo "Build"
+          
+          # Always restart the service
+          sudo systemctl restart invoice-manager.service
+          echo "Restart"
         '
 
 
