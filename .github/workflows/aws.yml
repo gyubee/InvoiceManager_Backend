@@ -36,9 +36,12 @@ jobs:
         ssh -i ~/.ssh/id_rsa $USER@$HOST '
           cd ~/app
           echo "Source code copied successfully"
-          ls -la
-          # Add any additional commands you want to run on the EC2 instance
+
+          # Copy environment files from ~/env to ~/app/src/main/resources
+          cp ~/env/* src/main/resources/
+          echo "Environment files copied successfully"
         '
+
 
     - name: Clean up
       if: always()
