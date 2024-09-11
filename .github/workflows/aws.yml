@@ -1,34 +1,45 @@
 name: Java CI/CD
+
 on:
   pull_request:
     types: [closed]
     branches: [develop]
+
 jobs:
   build_and_deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    steps:
-    # 1. Checkout the code
-    - uses: actions/checkout@v3
+    
+    env:
+      HOST: ${{ secrets.EC2_HOST }}
+      USER: ${{ secrets.EC2_USER }}
 
-    # 2. Set up JDK (Java 17 for example)
-    - name: copy to ec2
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      env:
+        PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       run: |
-        echo "Setting up SSH key"
-        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        echo "Copying source code to EC2"
-        scp -r -i private_key -o StrictHostKeyChecking=no * ${USER}@${HOST}:~/app/
-        scp -r -i private_key -o StrictHostKeyChecking=no .* ${USER}@${HOST}:~/app/
-        echo "Compressing source code"
-        tar czf app.tar.gz *
-        echo "Copying compressed source code to EC2"
-        scp -i private_key -o StrictHostKeyChecking=no app.tar.gz ${USER}@${HOST}:~/app/
-        echo "Executing commands on EC2"
-        ssh -i private_key -o StrictHostKeyChecking=no ${USER}@${HOST} '
+        mkdir -p ~/.ssh
+        echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $HOST >> ~/.ssh/known_hosts
+
+    - name: Copy files to EC2
+      run: |
+        rsync -avz --exclude='.git' --delete -e "ssh -i ~/.ssh/id_rsa" ./ $USER@$HOST:~/app/
+
+    - name: Execute commands on EC2
+      run: |
+        ssh -i ~/.ssh/id_rsa $USER@$HOST '
           cd ~/app
           echo "Source code copied successfully"
-          tar xzf app.tar.gz
-          rm app.tar.gz
-          echo "Source code copied and extracted successfully"
           ls -la
+          # Add any additional commands you want to run on the EC2 instance
         '
+
+    - name: Clean up
+      if: always()
+      run: rm -rf ~/.ssh
