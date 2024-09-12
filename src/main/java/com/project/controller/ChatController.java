@@ -150,7 +150,7 @@ public class ChatController {
             Map<String, Object> invoiceData = objectMapper.readValue(TEST_JSON1, Map.class);
             invoiceService.saveInvoiceData(invoiceData);
 
-            return ResponseEntity.ok("Invoice processed successfully!!!!!!");
+            return ResponseEntity.ok("Invoice processed successfully!");
 
         } catch (JsonProcessingException e) {
             logger.error("Error parsing invoice data", e);
