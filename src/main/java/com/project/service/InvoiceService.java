@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -149,6 +150,18 @@ public class InvoiceService {
         }
 
         invoiceItemRepository.save(invoiceItem);
+    }
+
+//    bestseller
+    public List<Map<String, Object>> getBestSellers() {
+        List<Object[]> results = invoiceItemRepository.findTopSellingProducts(5);
+
+        return results.stream().map(result -> {
+            Map<String, Object> item = new HashMap<>();
+            item.put("productName", result[0]);
+            item.put("totalQuantity", result[1]);
+            return item;
+        }).collect(Collectors.toList());
     }
 
 //    private static final List<DateTimeFormatter> DATE_FORMATTERS = Arrays.asList(

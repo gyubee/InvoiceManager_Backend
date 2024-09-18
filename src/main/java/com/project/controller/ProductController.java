@@ -3,6 +3,7 @@ package com.project.controller;
 import com.project.dto.ItemDiscountDTO;
 import com.project.dto.ProductExpiryDTO;
 import com.project.entity.Product;
+import com.project.service.InvoiceService;
 import com.project.service.DiscountService;
 import com.project.service.InvoiceItemService;
 import com.project.service.ProductService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/invoicemanager/products")
@@ -135,4 +137,25 @@ public class ProductController {
             return ResponseEntity.status(500).body("Error applying global discount: " + e.getMessage());
         }
     }
+
+//    bestseller
+
+
+    @Autowired
+    private InvoiceService invoiceService;
+
+    @GetMapping("/bestsellers")
+    public ResponseEntity<List<Map<String, Object>>> getBestsellers() {
+        List<Map<String, Object>> bestsellers = invoiceService.getBestSellers();
+        return ResponseEntity.ok(bestsellers);
+    }
+
+//    test
+//    @GetMapping("/bestsellers")
+//    public String getBestsellers() {
+//        return "AAAA";
+//    }
+
+
+
 }
