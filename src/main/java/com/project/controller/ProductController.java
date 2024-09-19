@@ -16,9 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
+import java.util.HashMap;
+import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/invoicemanager/products")
@@ -149,6 +153,21 @@ public class ProductController {
         List<Map<String, Object>> bestsellers = invoiceService.getBestSellers();
         return ResponseEntity.ok(bestsellers);
     }
+
+    @GetMapping("/monthly-revenue")
+    public ResponseEntity<Map<String, Object>> getMonthlyRevenue() {
+//        LocalDate date = LocalDate.now(); // 확장성
+        LocalDate date = LocalDate.of(2022, 7, 2);
+        BigDecimal revenue = invoiceService.getTotalRevenueForMonth(date);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("year", date.getYear());
+        response.put("month", date.getMonth());
+        response.put("totalRevenue", revenue);
+
+        return ResponseEntity.ok(response);
+    }
+
 
 //    test
 //    @GetMapping("/bestsellers")
