@@ -3,6 +3,7 @@ package com.project.controller;
 import com.project.dto.ItemDiscountDTO;
 import com.project.dto.ProductExpiryDTO;
 import com.project.entity.Product;
+import com.project.service.InvoiceService;
 import com.project.service.DiscountService;
 import com.project.service.InvoiceItemService;
 import com.project.service.ProductService;
@@ -15,8 +16,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
+import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/invoicemanager/products")
@@ -135,4 +141,40 @@ public class ProductController {
             return ResponseEntity.status(500).body("Error applying global discount: " + e.getMessage());
         }
     }
+
+//    bestseller
+
+
+    @Autowired
+    private InvoiceService invoiceService;
+
+    @GetMapping("/bestsellers")
+    public ResponseEntity<List<Map<String, Object>>> getBestsellers() {
+        List<Map<String, Object>> bestsellers = invoiceService.getBestSellers();
+        return ResponseEntity.ok(bestsellers);
+    }
+
+    @GetMapping("/monthly-revenue")
+    public ResponseEntity<Map<String, Object>> getMonthlyRevenue() {
+//        LocalDate date = LocalDate.now(); // 확장성
+        LocalDate date = LocalDate.of(2022, 7, 2);
+        BigDecimal revenue = invoiceService.getTotalRevenueForMonth(date);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("year", date.getYear());
+        response.put("month", date.getMonth());
+        response.put("totalRevenue", revenue);
+
+        return ResponseEntity.ok(response);
+    }
+
+
+//    test
+//    @GetMapping("/bestsellers")
+//    public String getBestsellers() {
+//        return "AAAA";
+//    }
+
+
+
 }

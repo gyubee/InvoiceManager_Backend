@@ -31,4 +31,13 @@ public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Intege
 
     List<InvoiceItem> findAllByExpirationDateBetween(LocalDate startDate, LocalDate endDate);
 
+//    bestSeller method
+    @Query("SELECT i.product.productName, SUM(i.quantity) as totalQuantity " +
+            "FROM InvoiceItem i " +
+            "GROUP BY i.product.productName " +
+            "ORDER BY totalQuantity DESC " +
+            "LIMIT :limit")
+    List<Object[]> findTopSellingProducts(@Param("limit") int limit);
+
+
 }
