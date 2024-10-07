@@ -4,6 +4,7 @@ import com.project.dto.ItemDiscountDTO;
 import com.project.dto.ProductExpiryDTO;
 import com.project.entity.Product;
 import com.project.service.InvoiceService;
+import com.project.service.SalesService;
 import com.project.service.DiscountService;
 import com.project.service.InvoiceItemService;
 import com.project.service.ProductService;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
@@ -142,23 +144,16 @@ public class ProductController {
         }
     }
 
-//    bestseller
-
 
     @Autowired
-    private InvoiceService invoiceService;
-
-    @GetMapping("/bestsellers")
-    public ResponseEntity<List<Map<String, Object>>> getBestsellers() {
-        List<Map<String, Object>> bestsellers = invoiceService.getBestSellers();
-        return ResponseEntity.ok(bestsellers);
-    }
-
+    private SalesService salesService;
+    //1. month total margin
+    //    http://localhost:8001/invoicemanager/products/monthly-revenue?salesMonth=2024-02-01
     @GetMapping("/monthly-revenue")
-    public ResponseEntity<Map<String, Object>> getMonthlyRevenue() {
-//        LocalDate date = LocalDate.now(); // 확장성
-        LocalDate date = LocalDate.of(2022, 7, 2);
-        BigDecimal revenue = invoiceService.getTotalRevenueForMonth(date);
+    public ResponseEntity<Map<String, Object>> getMonthlyRevenue(@RequestParam String salesMonth) {
+        LocalDate date = LocalDate.parse(salesMonth); // 쿼리 패러미터로 변경
+
+        BigDecimal revenue = salesService.getTotalRevenueForMonth(date);
 
         Map<String, Object> response = new HashMap<>();
         response.put("year", date.getYear());
@@ -166,6 +161,53 @@ public class ProductController {
         response.put("totalRevenue", revenue);
 
         return ResponseEntity.ok(response);
+    }
+
+
+
+    //   2. bestseller
+
+
+
+    @GetMapping("/bestsellers")
+    public ResponseEntity<List<Map<String, Object>>> getBestsellers() {
+        List<Map<String, Object>> bestsellers = salesService.getBestSellers();
+        return ResponseEntity.ok(bestsellers);
+    }
+
+    //3. positive trending
+    // 전월 대비 판매량 상승 비율 상위 5개 항목을 리턴하는 API
+    @GetMapping("/trending/positive")
+    public ResponseEntity<List<Map<String, Object>>> getTopPositive(@RequestParam String salesMonth) {
+        LocalDateTime date = LocalDate.parse(salesMonth).atStartOfDay();  // 입력된 날짜를 LocalDate로 변환
+
+        // 서비스 계층에서 비즈니스 로직 처리
+        List<Map<String, Object>> topPositive = salesService.calculatePositiveTrending(date);
+
+        return ResponseEntity.ok(topPositive);
+    }
+
+    //4. positive trending
+    // 전월 대비 판매량 상승 비율 상위 5개 항목을 리턴하는 API
+    @GetMapping("/trending/negative")
+    public ResponseEntity<List<Map<String, Object>>> getTopNegative(@RequestParam String salesMonth) {
+        LocalDateTime date = LocalDate.parse(salesMonth).atStartOfDay();  // 입력된 날짜를 LocalDate로 변환
+
+        // 서비스 계층에서 비즈니스 로직 처리
+        List<Map<String, Object>> topNegative = salesService.calculateNegativeTrending(date);
+
+        return ResponseEntity.ok(topNegative);
+    }
+
+//    5. category
+//    http://localhost:8001/invoicemanager/products/category-percentage?salesMonth=2024-02-01
+
+
+    @GetMapping("/category-percentage")
+    public ResponseEntity<Map<String, Double>> getCategorySalesPercentage(@RequestParam String salesMonth) {
+        LocalDateTime salesMonthDateTime = LocalDate.parse(salesMonth).atStartOfDay();
+        Map<String, Double> categorySalesPercentage = salesService.getCategorySalesPercentage(salesMonthDateTime);
+        return ResponseEntity.ok(categorySalesPercentage);
     }
 
 
