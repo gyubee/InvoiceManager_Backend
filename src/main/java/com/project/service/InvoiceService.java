@@ -152,29 +152,8 @@ public class InvoiceService {
         invoiceItemRepository.save(invoiceItem);
     }
 
-//    bestseller
-    public List<Map<String, Object>> getBestSellers() {
-        List<Object[]> results = invoiceItemRepository.findTopSellingProducts(5);
-
-        return results.stream().map(result -> {
-            Map<String, Object> item = new HashMap<>();
-            item.put("productName", result[0]);
-            item.put("totalQuantity", result[1]);
-            return item;
-        }).collect(Collectors.toList());
-    }
 
 
-//    total revenue
-
-    public BigDecimal getTotalRevenueForMonth(LocalDate date) {
-        // 여기서는 2022/07/02를 사용 (매출이 있는 달이 그거밖에 없음)
-        // 생각해보니 이건 총 수입량이었음
-        // 매출은 어디서 받아올 수 있을까요
-        // 나중에는 LocalDate.now() 넣으면 현재일자로 변경가능
-//        LocalDate fixedDate = LocalDate.of(2022, 7, 2);
-        return invoiceRepository.calculateTotalRevenueForMonth(date.getYear(), date.getMonthValue());
-    }
 //    private static final List<DateTimeFormatter> DATE_FORMATTERS = Arrays.asList(
 //            DateTimeFormatter.ofPattern("MMM-dd-yyyy"),
 //            DateTimeFormatter.ofPattern("MM/dd/yyyy"),
