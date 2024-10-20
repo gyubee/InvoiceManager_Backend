@@ -17,12 +17,14 @@ public interface AnalysisRepository extends JpaRepository<Sales, Integer> {
             "JOIN p.category c")
     List<CategoryAnalysisDTO> findAllCategoryProductSales();
 
-//    @Query("SELECT new com.project.dto.CompanyAnalysisDTO(c.companyId, c.companyName, SUM(i.totalPrice), " +
-//            "FUNCTION('MONTH', i.receiveDate), FUNCTION('YEAR', i.receiveDate)) " +
-//            "FROM Invoice i " +
-//            "JOIN i.company c " +
-//            "GROUP BY c.companyId, c.companyName, FUNCTION('MONTH', i.receiveDate), FUNCTION('YEAR', i.receiveDate)")
-//    List<CompanyAnalysisDTO> findAllCompanyPurchasesGroupedByMonth();
+
+    @Query("SELECT new com.project.dto.CompanyAnalysisDTO(c.companyId, c.companyName, SUM(i.totalPrice), " +
+            "SUBSTRING(CAST(i.receiveDate AS string), 1, 7)) " + // Format: YYYY-MM
+            "FROM Invoice i " +
+            "JOIN i.company c " +
+            "GROUP BY c.companyId, c.companyName, SUBSTRING(CAST(i.receiveDate AS string), 1, 7)")
+    List<CompanyAnalysisDTO> findAllCompanyPurchasesGroupedByMonth();
+
 
     @Query("SELECT new com.project.dto.MonthlySalesAnalysisDTO(p.productId, p.productName, p.salePrice, s.salesMonth, s.monthlySales) " +
             "FROM Sales s " +
