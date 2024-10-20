@@ -1,20 +1,19 @@
 package com.project.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class CompanyAnalysisDTO {
     private Integer companyId;
     private String companyName;
     private BigDecimal totalPrice;
-    private int month;
-    private int year;
+    private String receiveMonth;
 
-    public CompanyAnalysisDTO(Integer companyId, String companyName, BigDecimal totalPrice, int month, int year) {
+    public CompanyAnalysisDTO(Integer companyId, String companyName, BigDecimal totalPrice, String receiveMonth) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.totalPrice = totalPrice;
-        this.month = month;
-        this.year = year;
+        this.receiveMonth = receiveMonth;
     }
 
     public Integer getCompanyId() {
@@ -41,19 +40,11 @@ public class CompanyAnalysisDTO {
         this.totalPrice = totalPurchase;
     }
 
-    public int getMonth() {
-        return month;
+    public String getReceiveMonth() {
+        return receiveMonth;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    public void setReceiveMonth(String receiveMonth) {
+        this.receiveMonth = receiveMonth;
     }
 }

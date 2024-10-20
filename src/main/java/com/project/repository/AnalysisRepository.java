@@ -1,6 +1,7 @@
 package com.project.repository;
 
 import com.project.dto.CompanyAnalysisDTO;
+import com.project.dto.MonthlySalesAnalysisDTO;
 import com.project.entity.Sales;
 import com.project.dto.CategoryAnalysisDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,10 +17,17 @@ public interface AnalysisRepository extends JpaRepository<Sales, Integer> {
             "JOIN p.category c")
     List<CategoryAnalysisDTO> findAllCategoryProductSales();
 
-//    @Query("SELECT new com.project.dto.CompanyAnalysisDTO(c.companyId, c.companyName, SUM(i.totalPrice), " +
-//            "FUNCTION('MONTH', i.receiveDate), FUNCTION('YEAR', i.receiveDate)) " +
-//            "FROM Invoice i " +
-//            "JOIN i.company c " +
-//            "GROUP BY c.companyId, c.companyName, FUNCTION('MONTH', i.receiveDate), FUNCTION('YEAR', i.receiveDate)")
-//    List<CompanyAnalysisDTO> findAllCompanyPurchasesGroupedByMonth();
+
+    @Query("SELECT new com.project.dto.CompanyAnalysisDTO(c.companyId, c.companyName, SUM(i.totalPrice), " +
+            "SUBSTRING(CAST(i.receiveDate AS string), 1, 7)) " + // Format: YYYY-MM
+            "FROM Invoice i " +
+            "JOIN i.company c " +
+            "GROUP BY c.companyId, c.companyName, SUBSTRING(CAST(i.receiveDate AS string), 1, 7)")
+    List<CompanyAnalysisDTO> findAllCompanyPurchasesGroupedByMonth();
+
+
+    @Query("SELECT new com.project.dto.MonthlySalesAnalysisDTO(p.productId, p.productName, p.salePrice, s.salesMonth, s.monthlySales) " +
+            "FROM Sales s " +
+            "JOIN s.product p")
+    List<MonthlySalesAnalysisDTO> findMonthlySalesComparison();
 }
