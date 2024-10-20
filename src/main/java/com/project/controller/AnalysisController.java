@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.dto.CategoryAnalysisDTO;
 import com.project.dto.CompanyAnalysisDTO;
+import com.project.dto.MonthlySalesAnalysisDTO;
 import com.project.service.AnalysisService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,9 @@ public class AnalysisController {
 //        return ResponseEntity.ok(companyAnalysis);
 //    }
 
+    @GetMapping("/monthly")
+    public ResponseEntity<List<MonthlySalesAnalysisDTO>> getMonthlySalesComparison() {
+        List<MonthlySalesAnalysisDTO> comparisonData = analysisService.getMonthlySalesComparison();
+        return ResponseEntity.ok(comparisonData);
+    }
 }

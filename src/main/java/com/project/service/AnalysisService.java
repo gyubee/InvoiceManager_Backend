@@ -2,6 +2,7 @@ package com.project.service;
 
 import com.project.dto.CategoryAnalysisDTO;
 import com.project.dto.CompanyAnalysisDTO;
+import com.project.dto.MonthlySalesAnalysisDTO;
 import com.project.repository.AnalysisRepository;
 import com.project.repository.CompanyAnalysisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class AnalysisService {
         this.companyAnalysisRepository = companyAnalysisRepository;
     }
 
-    @Autowired
     public List<CategoryAnalysisDTO> getAllCategoryProductSales(){
         return analysisRepository.findAllCategoryProductSales();
     }
@@ -28,4 +28,8 @@ public class AnalysisService {
 //    public List<CompanyAnalysisDTO> getAllCompanyAnalysis(){
 //        return companyAnalysisRepository.findAllCompanyPurchasesGroupedByMonth();
 //    }
+
+    public List<MonthlySalesAnalysisDTO> getMonthlySalesComparison() {
+        return analysisRepository.findMonthlySalesComparison();
+    }
 }
