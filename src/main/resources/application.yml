@@ -30,6 +30,7 @@ logging:
     org:
       hibernate:
         type: trace
+        SQL: DEBUG
 
 springdoc:
   swagger-ui:

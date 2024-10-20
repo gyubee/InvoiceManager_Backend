@@ -33,7 +33,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/invoice")
+@RequestMapping("/invoicemanager/invoice")
 public class ChatController {
     private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
@@ -135,7 +135,7 @@ public class ChatController {
     }
 
     @CrossOrigin(origins = "http://localhost:63342")
-    @PostMapping("/ai/image/upload")
+    @PostMapping("/image/upload")
     public String describeImage(@RequestParam("image") MultipartFile imageFile) {
         try {
             return openAiService.extractInvoice(imageFile);
