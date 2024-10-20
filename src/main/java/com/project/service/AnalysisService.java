@@ -20,6 +20,7 @@ public class AnalysisService {
         this.companyAnalysisRepository = companyAnalysisRepository;
     }
 
+    @Autowired
     public List<CategoryAnalysisDTO> getAllCategoryProductSales(){
         return analysisRepository.findAllCategoryProductSales();
     }
