@@ -95,14 +95,14 @@ public class InvoiceService {
 
     private Product setProduct(Map<String, Object> productData, Company supplier) {
         String productName = (String) productData.get("product_name");
-        String hsCode = (String) productData.get("hs_code");
+        String hscode = (String) productData.get("hs_code");
         Integer quantity = (Integer) productData.get("quantity");
 
-        Product product = productRepository.findByProductNameAndHscodeAndSupplier(productName, hsCode, supplier)
+        Product product = productRepository.findByProductNameAndHscodeAndSupplier(productName, hscode, supplier)
                 .orElseGet(() -> {
                     Product newProduct = new Product();
                     newProduct.setProductName(productName);
-                    newProduct.setHscode(hsCode);
+                    newProduct.setHscode(hscode);
                     newProduct.setSalePrice(new BigDecimal(-1)); // value needs to be treated by admin later on
                     newProduct.setSupplier(supplier);
 

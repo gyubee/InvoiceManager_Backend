@@ -126,7 +126,7 @@ class ProductServiceTest {
         ProductExpiryDTO dto1 = result.get(0);
         assertEquals(1, dto1.getProductId());
         assertEquals("Product A", dto1.getProductName());
-        assertEquals("1234", dto1.getHsCode());
+        assertEquals("1234", dto1.getHscode());
         assertEquals(0, BigDecimal.valueOf(100).compareTo(dto1.getPrice()));
         assertEquals("Category A", dto1.getCategoryName());
         assertEquals("Supplier A", dto1.getSupplierName());
@@ -137,7 +137,7 @@ class ProductServiceTest {
         ProductExpiryDTO dto2 = result.get(1);
         assertEquals(2, dto2.getProductId());
         assertEquals("Product B", dto2.getProductName());
-        assertEquals("5678", dto2.getHsCode());
+        assertEquals("5678", dto2.getHscode());
         assertEquals(0, BigDecimal.valueOf(150).compareTo(dto2.getPrice()));
         assertEquals("Category B", dto2.getCategoryName());
         assertEquals("Supplier B", dto2.getSupplierName());
@@ -148,7 +148,7 @@ class ProductServiceTest {
         ProductExpiryDTO dto3 = result.get(2);
         assertEquals(3, dto3.getProductId());
         assertEquals("Product C", dto3.getProductName());
-        assertEquals("91011", dto3.getHsCode());
+        assertEquals("91011", dto3.getHscode());
         assertEquals(0, BigDecimal.valueOf(200).compareTo(dto3.getPrice()));
         assertEquals("Category C", dto3.getCategoryName());
         assertEquals("Supplier C", dto3.getSupplierName());

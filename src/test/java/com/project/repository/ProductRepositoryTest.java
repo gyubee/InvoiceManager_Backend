@@ -50,18 +50,18 @@ class ProductRepositoryTest {
     void findByProductNameAndHscodeAndSupplier() {
         // Given
         String productName = "Test Product";
-        String hsCode = "1234";
+        String hscode = "1234";
         Company company = product.getSupplier();
-        when(productRepository.findByProductNameAndHscodeAndSupplier(productName, hsCode, company))
+        when(productRepository.findByProductNameAndHscodeAndSupplier(productName, hscode, company))
                 .thenReturn(Optional.of(product));
 
         // When
-        Optional<Product> result = productRepository.findByProductNameAndHscodeAndSupplier(productName, hsCode, company);
+        Optional<Product> result = productRepository.findByProductNameAndHscodeAndSupplier(productName, hscode, company);
 
         // Then
         assertTrue(result.isPresent());
         assertEquals(productName, result.get().getProductName());
-        assertEquals(hsCode, result.get().getHscode());
+        assertEquals(hscode, result.get().getHscode());
         assertEquals(company, result.get().getSupplier());
     }
 

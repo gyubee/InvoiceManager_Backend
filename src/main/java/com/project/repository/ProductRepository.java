@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-    Optional<Product> findByProductNameAndHscodeAndSupplier(String productName, String hsCode, Company company);
+    Optional<Product> findByProductNameAndHscodeAndSupplier(String productName, String hscode, Company company);
 
     // STOCK related methods
     //Products sorted by stock

@@ -77,7 +77,7 @@ public class ProductService {
         for (Object[] result : results) {
             Integer productId = (Integer) result[0];
             String productName = (String) result[1];
-            String hsCode = (String) result[2];
+            String hscode = (String) result[2];
             BigDecimal price = (BigDecimal) result[3];
             String categoryName = (String) result[4];
             String supplierName = (String) result[5];
@@ -91,7 +91,7 @@ public class ProductService {
             ProductExpiryDTO dto = new ProductExpiryDTO();
             dto.setProductId(productId);
             dto.setProductName(productName);
-            dto.setHsCode(hsCode);
+            dto.setHscode(hscode);
             dto.setPrice(price);
             dto.setCategoryName(categoryName);
             dto.setSupplierName(supplierName);

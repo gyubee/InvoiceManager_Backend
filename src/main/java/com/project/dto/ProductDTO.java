@@ -5,17 +5,17 @@ import java.math.BigDecimal;
 public class ProductDTO {
     private Integer productId;
     private String productName;
-    private String hsCode;
+    private String hscode;
     private BigDecimal unitPrice;
     private BigDecimal quantity;
 
     // Constructors
     public ProductDTO() {}
 
-    public ProductDTO(Integer productId, String productName, String hsCode, BigDecimal unitPrice, BigDecimal quantity) {
+    public ProductDTO(Integer productId, String productName, String hscode, BigDecimal unitPrice, BigDecimal quantity) {
         this.productId = productId;
         this.productName = productName;
-        this.hsCode = hsCode;
+        this.hscode = hscode;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
@@ -37,12 +37,12 @@ public class ProductDTO {
         this.productName = productName;
     }
 
-    public String getHsCode() {
-        return hsCode;
+    public String getHscode() {
+        return hscode;
     }
 
-    public void setHsCode(String hsCode) {
-        this.hsCode = hsCode;
+    public void setHscode(String hscode) {
+        this.hscode = hscode;
     }
 
     public BigDecimal getUnitPrice() {
