@@ -8,7 +8,6 @@ import java.time.LocalDate;
 public class ProductExpiryDTO {
     private Integer productId;
     private String productName;
-    @JsonProperty("hscode")
     private String hscode;
     private BigDecimal price;
     private String categoryName;
